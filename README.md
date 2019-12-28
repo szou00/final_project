@@ -47,22 +47,22 @@ General types of functions we will be implementing:
 
 ## Timeline
 <b> January 5th </b>
-- Create a welcome screen that will print out rules and instructions to the user.  <i> William </i>
-- Print out the game board and create necessary files that will be called into use later on.  <i> Sharon </i>
+- <i> William </i>: Create a welcome screen that will print out rules and instructions to the user.
+- <i> Sharon </i>: Print out the game board and create necessary files that will be called into use later on.
 
 <b> January 8th </b>
-- Create the different types of ships and display them on the board <i> William </i>
-- Implement the code for players to use the coordinates of the mouse to choose where they want their ships to be. Print out the results <i> Sharon </i>
+- <i> William </i>: Create the different types of ships and display them on the board.
+- <i> Sharon </i>: Implement the code for players to use the coordinates of the mouse to choose where they want their ships to be. Print out the results.
 
 <b> January 10th </b>
-- Add in code for random placement of ships if the player exceeds a certain time in choosing manually choosing where to place the ships
+- <i> William </i>: Add in code for random placement of ships if the player exceeds a certain time in choosing manually choosing where to place the ships
 
 <b> January 12th </b>
-- Implement switching turns between players? The screen should display the results, and then shift back to the user’s own screen <i> Sharon/William </i>
+-  <i> Sharon </i>: Implement switching turns between players? The screen should display the results, and then shift back to the user’s own screen
 
 <b> January 15th </b>
-- Debug <i> Sharon </i>
-- End of game screen <i> William </i>
+- <i> Sharon </i>: Debug.
+- <i> William </i>: End of game screen.
 
 <b> January 17th </b>
-- Debug <i> Sharon + William </i>
+- <i> Sharon + William </i>: Debug.
