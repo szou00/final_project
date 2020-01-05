@@ -33,11 +33,13 @@ For our final project, we plan to create the game Battleship. Battleship is a st
 
 ## Technical Design
 - Allocating memory: At the beginning of the game, memory will be allocated to remember the names of the players and the position of their ships. These positions will be copied over to two corresponding files.
-- Working with files: Two files will be created at the beginning of the game. One file will contain the locations of Player 1’s ships, and one file will contain the locations of Player 2’s ships. When a ship is struck down, the file will be modified to mark the change. These will be read from at the beginning of each turn, and the grid will be printed out on the screen accordingly.  
 - Finding information about files (stat and such): The program will use information about the files to check the number of ships that are destroyed/still standing
 - Signals: if a player makes an error in entering their names or in the placement of their ships, return messages accordingly
 - Not yet sure if these will be used:
-Processes (fork, exec, etc.), Pipes (named and unnamed), Shared memory, Semaphores, Networking.
+- Shared memory: used to store the state of the board state/position of ships <- this will mostly be utilized instead of files to have faster gameplay
+- Semaphores: used to control access to the shared memory
+- Working with files: Two files will be created at the beginning of the game. One file will contain the locations of Player 1’s ships, and one file will contain the locations of Player 2’s ships. When a ship is struck down, the file will be modified to mark the change. These will be read from at the beginning of each turn, and the grid will be printed out on the screen accordingly.  
+Processes (fork, exec, etc.), Pipes (named and unnamed), Networking.
 
 General types of functions we will be implementing:
 - welcomeScreen()
