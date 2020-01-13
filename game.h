@@ -13,6 +13,7 @@
 #define ROWS 10
 #define COLUMNS 10
 
+<<<<<<< HEAD
 #define NUM_OF_SHIPS  5
 
 #define PLAYER_ONE    0
@@ -70,3 +71,18 @@ typedef enum {
 void         printWelcome                (void);
 void         initializeBoard             (Cell board[][COLS]);
 void         printGame                   (Cell board [][COLS], Boolean showPegs);
+=======
+typedef struct ship {
+  int ship_type;
+  int player; //which player this ship belongs to
+  int positionx; //x-coordinate of position
+  int positiony; //y-coordinate of position
+} ship;
+
+typedef struct cell {
+  int hasShip; //stores whether there is a ship or not 
+  ship this_ship; //store the ship type
+  int positionx; //x-coordinate of position
+  int positiony; //y-coordinate of position
+} cell;
+>>>>>>> 90a3d7c16747afb4b89c494d19b498dace847ba8

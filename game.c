@@ -1,25 +1,47 @@
 #include "game.h"
 
+<<<<<<< HEAD
 void initializeBoard(Cell board[ROWS][COLUMNS]) {
-  int r = 0, c = 0;
-
-	for (r = 0; r < ROWS; r++)
-		for (c = 0; c < COLUMNS; c++) {
-			board[r][c].positionx = r;
-			board[r][c].positiony = c;
-		}
-}
-
+=======
 void printGame(cell Board[ROWS][COLUMNS]) {
+>>>>>>> 90a3d7c16747afb4b89c494d19b498dace847ba8
   int r = 0, c = 0;
 
 	for (r = 0; r < ROWS; r++) {
 		for (c = 0; c < COLUMNS; c++) {
-			// printf("* ");
-			printf("%d%d ", Board[r][c].positionx, Board[r][c].positiony);
+<<<<<<< HEAD
+			board[r][c].positionx = r;
+			board[r][c].positiony = c;
+=======
+      if (Board[r][c].hasShip == 1) {
+        if (Board[r][c].this_ship.player == 1) {
+          printf("1 ");
+        }
+        else {
+          printf("2 ");
+        }
+      }
+			else {
+        printf("* ");
+      }
+			// printf("%d%d ", Board[r][c].positionx, Board[r][c].positiony);
+>>>>>>> 90a3d7c16747afb4b89c494d19b498dace847ba8
 		}
     printf("\n");
   }
+}
+
+void initializeBoard(cell Board[ROWS][COLUMNS]) {
+  int r = 0, c = 0;
+
+	for (r = 0; r < ROWS; r++) {
+		for (c = 0; c < COLUMNS; c++) {
+			Board[r][c].positionx = r;
+			Board[r][c].positiony = c;
+      Board[r][c].hasShip = 0;
+		}
+  }
+  printGame(Board);
 }
 
 void printWelcome() {
@@ -52,24 +74,49 @@ void printWelcome() {
 }
 
 //start off with 10 one box ships
-int randomizePositions() {
+int randomizePositions(cell Board[ROWS][COLUMNS]) {
   srand(time(0));
-  // int i = 0;
-  int s = 10; //number of ships to be placed
+  int i, r, c;
+  int p = 10; //number of ships to be placed
+  int pl = 1; //player 1
 
-  for (int i = 0; i<10; i++) {
-    printf("%d\n", rand()%100);
-
+  while (p > 0) {
+    r = rand()%10;
+    c = rand()%10;
+    // printf("%d%d\n", r, c);
+    struct ship s1;
+    if (pl == 1) { //current player is player 1
+      s1.player = 1;
+      pl = 2; //next player is player 2
+    }
+    else {
+      s1.player = 2;
+      pl = 1; //next player is 1
+    }
+    s1.positionx = r;
+    s1.positiony = c;
+    Board[r][c].this_ship = s1;
+    Board[r][c].hasShip = 1;
+    p--;
   }
+
+  printGame(Board);
+
   return 0;
 }
 
 int main() {
+  int inGame = 1;
+  char str[100];
   system("clear");
-  printWelcome();
 
+  //initialization
+  // printWelcome();
   cell Board[ROWS][COLUMNS];
   initializeBoard(Board);
-  printGame(Board);
-  randomizePositions();
+  printf("Would you like to:\n(1)randomize the ship positions?\n(2)Manually enter them? Choose 1 or 2\n");
+  scanf("%s", str);
+  if (strcmp(str, "1") == 0) {
+    randomizePositions(Board);
+  }
 }
