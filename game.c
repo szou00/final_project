@@ -1,14 +1,12 @@
 #include "game.h"
-#define ROWS 10
-#define COLUMNS 10
 
-void initializeBoard(cell Board[ROWS][COLUMNS]) {
+void initializeBoard(Cell board[ROWS][COLUMNS]) {
   int r = 0, c = 0;
 
 	for (r = 0; r < ROWS; r++)
 		for (c = 0; c < COLUMNS; c++) {
-			Board[r][c].positionx = r;
-			Board[r][c].positiony = c;
+			board[r][c].positionx = r;
+			board[r][c].positiony = c;
 		}
 }
 
