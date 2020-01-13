@@ -12,7 +12,6 @@
 #define ROWS 10
 #define COLUMNS 10
 
-
 typedef struct ship {
   int ship_type;
   int player; //which player this ship belongs to
