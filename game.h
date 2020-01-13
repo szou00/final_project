@@ -16,9 +16,12 @@
 typedef struct ship {
   int ship_type;
   int player; //which player this ship belongs to
+  int positionx; //x-coordinate of position
+  int positiony; //y-coordinate of position
 } ship;
 
 typedef struct cell {
+  int hasShip; //stores whether there is a ship or not 
   ship this_ship; //store the ship type
   int positionx; //x-coordinate of position
   int positiony; //y-coordinate of position
