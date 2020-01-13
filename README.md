@@ -48,13 +48,13 @@ General types of functions we will be implementing:
 - putShip()
 
 ## Timeline
-<b> January 5th </b>
-- <i> William </i>: Create a welcome screen that will print out rules and instructions to the user.
-- <i> Sharon </i>: Print out the game board and create necessary files that will be called into use later on.
+<b> January 9th </b>
+- <i> William </i>: Figure out how to network/share between computers
+- <i> Sharon </i>: Set up the game: create a welcome screen that will print out rules and instructions to the user, create different ships etc.
 
-<b> January 8th </b>
+<b> January 9th </b>
 - <i> William </i>: Create the different types of ships and display them on the board.
-- <i> Sharon </i>: Implement the code for players to use the coordinates of the mouse to choose where they want their ships to be. Print out the results.
+- <i> Sharon </i>: Figure out how to display the game in SDL or some other visual format. Write the code for players to use the coordinates of the mouse to choose where they want their ships to be. Print out the results.
 
 <b> January 10th </b>
 - <i> William </i>: Add in code for random placement of ships if the player exceeds a certain time in choosing manually choosing where to place the ships

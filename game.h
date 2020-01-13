@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <time.h>
 
 #include <sys/shm.h>
 #include <sys/types.h>
@@ -11,7 +12,6 @@
 
 #define ROWS 10
 #define COLUMNS 10
-
 
 typedef struct ship {
   int ship_type;

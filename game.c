@@ -1,16 +1,25 @@
 #include "game.h"
+#define ROWS 10
+#define COLUMNS 10
 
-void initializeBoard() {
+void initializeBoard(cell Board[ROWS][COLUMNS]) {
+  int r = 0, c = 0;
 
+	for (r = 0; r < ROWS; r++)
+		for (c = 0; c < COLUMNS; c++) {
+			Board[r][c].positionx = r;
+			Board[r][c].positiony = c;
+		}
 }
 
-void printGame() {
-  int r = 0;
-  int c = 0;
-  for (r = 0; r < ROWS; r++) {
-    for (c = 0; c < COLUMNS; c++) {
-      printf("* ");
-    }
+void printGame(cell Board[ROWS][COLUMNS]) {
+  int r = 0, c = 0;
+
+	for (r = 0; r < ROWS; r++) {
+		for (c = 0; c < COLUMNS; c++) {
+			// printf("* ");
+			printf("%d%d ", Board[r][c].positionx, Board[r][c].positiony);
+		}
     printf("\n");
   }
 }
@@ -44,8 +53,25 @@ void printWelcome() {
   system("clear");
 }
 
+//start off with 10 one box ships
+int randomizePositions() {
+  srand(time(0));
+  // int i = 0;
+  int s = 10; //number of ships to be placed
+
+  for (int i = 0; i<10; i++) {
+    printf("%d\n", rand()%100);
+
+  }
+  return 0;
+}
+
 int main() {
   system("clear");
   printWelcome();
-  printGame();
+
+  cell Board[ROWS][COLUMNS];
+  initializeBoard(Board);
+  printGame(Board);
+  randomizePositions();
 }
