@@ -47,8 +47,16 @@ void printWelcome() {
   system("clear");
 }
 
-//start off with 10 one box ships 
+//start off with 10 one box ships
 int randomizePositions() {
+  srand(time(0));
+  // int i = 0;
+  int s = 10; //number of ships to be placed
+
+  for (int i = 0; i<10; i++) {
+    printf("%d\n", rand()%100);
+
+  }
   return 0;
 }
 
@@ -59,4 +67,5 @@ int main() {
   cell Board[ROWS][COLUMNS];
   initializeBoard(Board);
   printGame(Board);
+  randomizePositions();
 }
