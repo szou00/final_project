@@ -102,6 +102,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
               Board[j][x1].shipSymbol = ships[i].shipName;
             }
             placed = 1;
+            printBoard(Board);
           }
         }
       }
@@ -132,6 +133,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
               Board[y1][j].shipSymbol = ships[i].shipName;
             }
             placed = 1;
+            printBoard(Board);
           }
         }
       }
