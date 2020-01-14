@@ -35,7 +35,7 @@ void initializeBoard(Cell Board[ROWS][COLS]) {
 		for (c = 0; c < COLS; c++) {
 			Board[r][c].position.ycoor = r;
 			Board[r][c].position.xcoor = c;
-      Board[r][c].shipSymbol = " ";
+      Board[r][c].shipSymbol = ' ';
 		}
   }
 }
