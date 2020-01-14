@@ -1,5 +1,5 @@
-all: game.o
-	gcc -o battleship game.o
+all: game.o main.o
+	gcc -o battleship game.o main.o
 
 game.o: game.c game.h
 	gcc -c game.c

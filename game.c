@@ -1,49 +1,5 @@
 #include "game.h"
 
-<<<<<<< HEAD
-void initializeBoard(Cell board[ROWS][COLUMNS]) {
-=======
-void printGame(cell Board[ROWS][COLUMNS]) {
->>>>>>> 90a3d7c16747afb4b89c494d19b498dace847ba8
-  int r = 0, c = 0;
-
-	for (r = 0; r < ROWS; r++) {
-		for (c = 0; c < COLUMNS; c++) {
-<<<<<<< HEAD
-			board[r][c].positionx = r;
-			board[r][c].positiony = c;
-=======
-      if (Board[r][c].hasShip == 1) {
-        if (Board[r][c].this_ship.player == 1) {
-          printf("1 ");
-        }
-        else {
-          printf("2 ");
-        }
-      }
-			else {
-        printf("* ");
-      }
-			// printf("%d%d ", Board[r][c].positionx, Board[r][c].positiony);
->>>>>>> 90a3d7c16747afb4b89c494d19b498dace847ba8
-		}
-    printf("\n");
-  }
-}
-
-void initializeBoard(cell Board[ROWS][COLUMNS]) {
-  int r = 0, c = 0;
-
-	for (r = 0; r < ROWS; r++) {
-		for (c = 0; c < COLUMNS; c++) {
-			Board[r][c].positionx = r;
-			Board[r][c].positiony = c;
-      Board[r][c].hasShip = 0;
-		}
-  }
-  printGame(Board);
-}
-
 void printWelcome() {
   printf("WELCOME TO\n");
   printf ("XXXXX   XXXX  XXXXXX XXXXXX XX     XXXXXX  XXXXX XX  XX XX XXXX\n");
@@ -73,50 +29,162 @@ void printWelcome() {
   system("clear");
 }
 
+void initializeBoard(Cell Board[ROWS][COLS]) {
+  int r = 0, c = 0;
+	for (r = 0; r < ROWS; r++) {
+		for (c = 0; c < COLS; c++) {
+			Board[r][c].position.ycoor = r;
+			Board[r][c].position.xcoor = c;
+      Board[r][c].shipSymbol = " ";
+		}
+  }
+}
+
+void printBoard(Cell Board[ROWS][COLS]) {
+  char *empty = " ";
+	for (int r = 0; r < ROWS; r++) {
+		for (int c = 0; c < COLS; c++) {
+      if (strcmp(&Board[r][c].shipSymbol, empty) == 0) {
+        printf("0 ");
+      }
+      else{
+        printf("%c ", Board[r][c].shipSymbol);
+      }
+    }
+    printf("\n");
+  }
+}
+
+void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
+  int x1 = 0;
+  int y1 = 0;
+  int x2 = 0;
+  int y2 = 0;
+  char *empty = " ";
+  for (int i = 0; i < NUM_SHIPS; i++){
+    int placed = 0;
+    while (!placed){
+      printf("This ship is %d cells long.\n", ships[i].length);
+      printf("Enter the x-coordinate of initial position: ");
+      scanf("%d", &x1);
+      printf("Enter the y-coordinate of initial position: ");
+      scanf("%d", &y1);
+      printf("Enter the x-coordinate of final position: ");
+      scanf("%d", &x2);
+      printf("Enter the y-coordinate of final position: ");
+      scanf("%d", &y2);
+      int valid = 1;
+      if (x1 != x2 && y1 != y2){
+        printf("Invalid coordinates. Try again");
+      }
+      else if (x1 == x2){
+        if (abs(y1-y2) != ships[i].length){
+          printf("Ship dopes not match this length.\n");
+        }
+        else{
+          int less = 0;
+          int more = 0;
+          if (y1 < y2){
+            less = y1;
+            more = y2;
+          }
+          else{
+            less = y2;
+            more = y1;
+          }
+          for (int j = less; j <= more; j++){
+            if (strcmp(&Board[j][x1].shipSymbol, empty) != 0){
+              valid = 0;
+              printf("Ships overlapping\n");
+            }
+          }
+          if (valid){
+            for (int j = less; j <= more; j++){
+              Board[j][x1].shipSymbol = ships[i].shipName;
+            }
+            placed = 1;
+          }
+        }
+      }
+      else{
+        if (abs(x1-x2) != ships[i].length){
+          printf("Ship dopes not match this length.\n");
+        }
+        else{
+          int less = 0;
+          int more = 0;
+          valid = 1;
+          if (x1 < x2){
+            less = x1;
+            more = x2;
+          }
+          else{
+            less = x2;
+            more = x1;
+          }
+          for (int j = less; j <= more; j++){
+            if (strcmp(&Board[y1][j].shipSymbol, empty) != 0){
+              valid = 0;
+              printf("Ships overlapping\n");
+            }
+          }
+          if (valid){
+            for (int j = less; j <= more; j++){
+              Board[y1][j].shipSymbol = ships[i].shipName;
+            }
+            placed = 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+
 //start off with 10 one box ships
-int randomizePositions(cell Board[ROWS][COLUMNS]) {
-  srand(time(0));
-  int i, r, c;
-  int p = 10; //number of ships to be placed
-  int pl = 1; //player 1
+// int randomizePositions(Cell Board[ROWS][COLUMNS]) {
+//   srand(time(0));
+//   int i, r, c;
+//   int p = 10; //number of ships to be placed
+//   int pl = 1; //player 1
+//
+//   while (p > 0) {
+//     r = rand()%10;
+//     c = rand()%10;
+//     // printf("%d%d\n", r, c);
+//     struct ship s1;
+//     if (pl == 1) { //current player is player 1
+//       s1.player = 1;
+//       pl = 2; //next player is player 2
+//     }
+//     else {
+//       s1.player = 2;
+//       pl = 1; //next player is 1
+//     }
+//     s1.positionx = r;
+//     s1.positiony = c;
+//     Board[r][c].this_ship = s1;
+//     Board[r][c].hasShip = 1;
+//     p--;
+//   }
+//
+//   printGame(Board);
+//
+//   return 0;
+// }
 
-  while (p > 0) {
-    r = rand()%10;
-    c = rand()%10;
-    // printf("%d%d\n", r, c);
-    struct ship s1;
-    if (pl == 1) { //current player is player 1
-      s1.player = 1;
-      pl = 2; //next player is player 2
-    }
-    else {
-      s1.player = 2;
-      pl = 1; //next player is 1
-    }
-    s1.positionx = r;
-    s1.positiony = c;
-    Board[r][c].this_ship = s1;
-    Board[r][c].hasShip = 1;
-    p--;
-  }
-
-  printGame(Board);
-
-  return 0;
-}
-
-int main() {
-  int inGame = 1;
-  char str[100];
-  system("clear");
-
-  //initialization
-  // printWelcome();
-  cell Board[ROWS][COLUMNS];
-  initializeBoard(Board);
-  printf("Would you like to:\n(1)randomize the ship positions?\n(2)Manually enter them? Choose 1 or 2\n");
-  scanf("%s", str);
-  if (strcmp(str, "1") == 0) {
-    randomizePositions(Board);
-  }
-}
+// int main() {
+//   int inGame = 1;
+//   char str[100];
+//   system("clear");
+//
+//   //initialization
+//   // printWelcome();
+//   cell Board[ROWS][COLUMNS];
+//   initializeBoard(Board);
+//   printf("Would you like to:\n(1)randomize the ship positions?\n(2)Manually enter them? Choose 1 or 2\n");
+//   scanf("%s", str);
+//   if (strcmp(str, "1") == 0) {
+//     randomizePositions(Board);
+//   }
+// }
