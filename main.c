@@ -20,9 +20,11 @@ int main(){
   placeShips(playerOne, ship);
   printBoard(playerOne);
   // placeShips(playerTwo, ship);
+  // printBoard(playerTwo);
 
   // Randomly chooses who should go first;
   int player = 1;
+  // randomizePositions(playerOne, ship);
 
   // while (1){
   //   switch(player){
