@@ -23,6 +23,7 @@
 #define CRUISER 'r'
 #define SUBMARINE 's'
 #define DESTROYER 'd'
+#define HIT 'X'
 
 // #define NORTH 0
 // #define SOUTH 1
@@ -50,7 +51,6 @@ typedef struct cell {
 typedef struct ship {
   char shipName;
   char length;
-  // int player; //which player this ship belongs to
 } Ship;
 
 // typedef enum {
@@ -74,3 +74,4 @@ void initializeBoard (Cell Board[ROWS][COLS]);
 void printBoard (Cell Board[ROWS][COLS]);
 void placeShips (Cell Board[ROWS][COLS], Ship ships[]);
 void place (Cell Board[ROWS][COLS], Ship ship);
+void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]);

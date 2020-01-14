@@ -41,7 +41,16 @@ void initializeBoard(Cell Board[ROWS][COLS]) {
 }
 
 void printBoard(Cell Board[ROWS][COLS]) {
+  int nums[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  int n = 0;
+  printf("  ");
+  while (n<10) {
+    printf("%d ", nums[n]);
+    n++;
+  }
+  printf("\n");
 	for (int r = 0; r < ROWS; r++) {
+    printf("%d ", nums[r]);
 		for (int c = 0; c < COLS; c++) {
       if (Board[r][c].shipSymbol == ' ') {
         printf("0 ");
@@ -62,7 +71,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   for (int i = 0; i < NUM_SHIPS; i++){
     int placed = 0;
     while (!placed){
-      // fix error when typing characters
+      printBoard(Board);
       printf("This ship is %d cells long.\n", ships[i].length);
       printf("Enter the x-coordinate of initial position: ");
       scanf("%d", &x1);
@@ -141,37 +150,66 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   }
 }
 
+// void hit(Board[ROWS][COLS], Ship ships[], int xcoor, int ycoor) {
+//   int i = 0;
+//   if (Board[xcoor][ycoor] != 0) {
+//     Board[xcoor][ycoor].shipSymbol == HIT;
+//     for (i = 0; i++; )
+//   }
+// }
 
-//start off with 10 one box ships
-// int randomizePositions(Cell Board[ROWS][COLUMNS]) {
+
+// void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]) {
 //   srand(time(0));
-//   int i, r, c;
-//   int p = 10; //number of ships to be placed
-//   int pl = 1; //player 1
+//   int x1, y1, x2, y2;
+//   int o;
+//   int placing = 1;
+//   int i = NUM_SHIPS;
 //
-//   while (p > 0) {
-//     r = rand()%10;
-//     c = rand()%10;
-//     // printf("%d%d\n", r, c);
-//     struct ship s1;
-//     if (pl == 1) { //current player is player 1
-//       s1.player = 1;
-//       pl = 2; //next player is player 2
+//   while (i == NUM_SHIPS) {
+//     o = rand()%2;
+//     printf("%d\n",i);
+//
+//     if (o == 1) {
+//       printf("horizontal\n");
+//       while (placing) { //orientation is horizontal
+//         y1 = rand()%10;
+//         y2 = y1;
+//         x1 = rand()%(10-ships[i].length);
+//         printf("x1: %d\n", x1);
+//         x2 += ships[i].length;
+//         printf("x2: %d\n", y1);
+//         if (x2 < COLS) {
+//           for (int j = x1; j <= x2; j++){
+//             Board[y1][j].shipSymbol = ships[i].shipName;
+//             printf("placed\n");
+//             i--;
+//           }
+//           placing = 0;
+//         }
+//       }
 //     }
-//     else {
-//       s1.player = 2;
-//       pl = 1; //next player is 1
+//
+//     if (o == 2) {
+//       printf("vertical\n");
+//       while (placing) { //orientation is vertical
+//         x1 = rand()%10;
+//         x2 = y1;
+//         y1 = rand()%10;
+//         y2 += ships[i].length;
+//         if (y2 < ROWS) {
+//           for (int j = y1; j <= y2; j++){
+//             Board[j][x1].shipSymbol = ships[i].shipName;
+//             printf("placed\n");
+//             i--;
+//           }
+//           placing = 0;
+//         }
+//       }
 //     }
-//     s1.positionx = r;
-//     s1.positiony = c;
-//     Board[r][c].this_ship = s1;
-//     Board[r][c].hasShip = 1;
-//     p--;
 //   }
 //
-//   printGame(Board);
-//
-//   return 0;
+//   printBoard(Board);
 // }
 
 // int main() {
