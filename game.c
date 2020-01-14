@@ -41,10 +41,9 @@ void initializeBoard(Cell Board[ROWS][COLS]) {
 }
 
 void printBoard(Cell Board[ROWS][COLS]) {
-  char *empty = " ";
 	for (int r = 0; r < ROWS; r++) {
 		for (int c = 0; c < COLS; c++) {
-      if (strcmp(&Board[r][c].shipSymbol, empty) == 0) {
+      if (Board[r][c].shipSymbol == ' ') {
         printf("0 ");
       }
       else{
@@ -60,10 +59,10 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   int y1 = 0;
   int x2 = 0;
   int y2 = 0;
-  char *empty = " ";
   for (int i = 0; i < NUM_SHIPS; i++){
     int placed = 0;
     while (!placed){
+      // fix error when typing characters
       printf("This ship is %d cells long.\n", ships[i].length);
       printf("Enter the x-coordinate of initial position: ");
       scanf("%d", &x1);
@@ -75,7 +74,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
       scanf("%d", &y2);
       int valid = 1;
       if (x1 != x2 && y1 != y2){
-        printf("Invalid coordinates. Try again");
+        printf("Invalid coordinates. Try again.\n");
       }
       else if (x1 == x2){
         if (abs(y1-y2) != ships[i].length){
@@ -93,7 +92,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
             more = y1;
           }
           for (int j = less; j <= more; j++){
-            if (strcmp(&Board[j][x1].shipSymbol, empty) != 0){
+            if (Board[j][x1].shipSymbol != ' '){
               valid = 0;
               printf("Ships overlapping\n");
             }
@@ -106,7 +105,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
           }
         }
       }
-      else{
+      else if (y1 == y2){
         if (abs(x1-x2) != ships[i].length){
           printf("Ship dopes not match this length.\n");
         }
@@ -123,7 +122,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
             more = x1;
           }
           for (int j = less; j <= more; j++){
-            if (strcmp(&Board[y1][j].shipSymbol, empty) != 0){
+            if (Board[y1][j].shipSymbol != 0){
               valid = 0;
               printf("Ships overlapping\n");
             }
