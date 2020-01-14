@@ -64,6 +64,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   for (int i = 0; i < NUM_SHIPS; i++){
     int placed = 0;
     while (!placed){
+      printBoard(Board);
       printf("This ship is %d cells long.\n", ships[i].length);
       printf("Enter the x-coordinate of initial position: ");
       scanf("%d", &x1);
