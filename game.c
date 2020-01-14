@@ -148,13 +148,13 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   }
 }
 
-// void hit(Board[ROWS][COLS], Ship ships[], int xcoor, int ycoor) {
-//   int i = 0;
-//   if (Board[xcoor][ycoor] != 0) {
-//     Board[xcoor][ycoor].shipSymbol == HIT;
-//     for (i = 0; i++; )
-//   }
-// }
+void hit(Board[ROWS][COLS], Ship ships[], int xcoor, int ycoor) {
+  int i = 0;
+  if (Board[xcoor][ycoor] != 0) {
+    Board[xcoor][ycoor].shipSymbol == HIT;
+    for (i = 0; i++; )
+  }
+}
 
 
 // void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]) {
