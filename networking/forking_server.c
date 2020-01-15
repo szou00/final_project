@@ -13,6 +13,12 @@ int main() {
   int f;
   listen_socket = server_setup();
 
+  // int shmid;
+  // int shmd;
+  // int fd;
+  // union semun sm;
+  // struct sembuf semaphore;
+
   while (1) {
 
     printf("Waiting for Player Two to connect...\n");
@@ -24,11 +30,16 @@ int main() {
     Cell playerTwo[ROWS][COLS];       /* Player two game board */
 
     // Create ships
-    Ship ship[NUM_SHIPS] = {{'c', 5},
-                           {'b', 4},
-                           {'r', 3},
-                           {'s', 3},
-                           {'d', 2}};
+    Ship ship1[NUM_SHIPS] = {{'c', 5}, /* Player one ships */
+                            {'b', 4},
+                            {'r', 3},
+                            {'s', 3},
+                            {'d', 2}};
+    Ship ship2[NUM_SHIPS] = {{'c', 5}, /* Player two ships */
+                            {'b', 4},
+                            {'r', 3},
+                            {'s', 3},
+                            {'d', 2}};
 
     // printWelcome();
     initializeBoard(playerOne);
@@ -40,6 +51,8 @@ int main() {
     printGame(playerOne, playerTwo);
 
     char buffer[BUFFER_SIZE];
+
+    printf("reading board\n");
 
     readBoard(playerTwo, buffer, client_socket);
     sendBoard(playerTwo, buffer, client_socket);
@@ -86,12 +99,20 @@ void process(char * s) {
 }
 
 void readBoard(Cell Board[ROWS][COLS], char buffer[256], int socket){
+  int n = 0;
   for (int i = 0; i < 10; i++){
     for (int j = 0; j < 10; j++){
-      read(socket, buffer, 256);
+      n = read(socket, buffer, 256);
+      if (n < 0) {
+        printf("error reading %d: %s\n", errno, strerror(errno));
+        exit();
+      }
+      printf("reading...\n");
+      printf("%s\n", buffer);
       Board[i][j].shipSymbol = buffer[0];
     }
   }
+  close(socket);
 }
 
 void sendBoard(Cell Board[ROWS][COLS], char buffer[256], int socket){
@@ -109,6 +130,27 @@ void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]){
   printf("\n\n\nYour Board\n\n");
   printBoard(me);
 }
+
+// int createFile() {
+//   shmid = semget(KEY_2, 1, IPC_CREAT | 0644);
+//   if (shmid < 0) {
+//     printf("SEMAPHORE error %d: %s\n", errno, strerror(errno));
+//     return errno;
+//   }
+//   semctl(shmid, 0, SETVAL, sm);
+//   shmd = shmget(KEY_1, sizeof(char *), IPC_CREAT | 0644);
+//   if (shmd < 0) {
+//     printf("MEMORY error %d: %s\n", errno, strerror(errno));
+//     return errno;
+//   }
+//   fd = open("file.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
+//   if (fd < 0) {
+//     printf("FILE error %d: %s\n", errno, strerror(errno));
+//     return errno;
+//   }
+//   close(fd);
+//   return 0;
+// }
 
 // void sendBoard(Cell Board, int client_socket, char buffer[][], int size){
 //   for (int i = 0; i < 10; i++){

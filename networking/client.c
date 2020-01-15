@@ -54,8 +54,8 @@ int main(int argc, char **argv) {
 void readBoard(Cell Board[ROWS][COLS], char buffer[256], int socket){
   for (int i = 0; i < 10; i++){
     for (int j = 0; j < 10; j++){
-      // read(socket, buffer, 256);
-      fgets(buffer, 256, socket);
+      read(socket, buffer, 256);
+      // fgets(buffer, 256, socket);
       Board[i][j].shipSymbol = buffer[0];
     }
   }

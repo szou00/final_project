@@ -7,26 +7,28 @@ int main(){
 	Cell playerTwo[ROWS][COLS];       /* Player two game board */
 
   // Create ships
-  Ship ship[NUM_SHIPS] = {{'c', 5,},
+  Ship ship1[NUM_SHIPS] = {{'c', 5,},
 	                           {'b', 4},
 	                           {'r', 3},
 	                           {'s', 3},
 	                           {'d', 2}};
 
-  //creating coordinate arrays for the ships
-  // int n = 0;
-  // for (n = 0; n++; n<NUM_SHIPS) {
-  //   Coordinate coords[ship[n].length];
-  //   printf("coords lengths: %d\n", ship[n].length);
-  //   ship[n].coordinates = coords;
-  // }
+  Ship ship2[NUM_SHIPS] = {{'c', 5,},
+                          {'b', 4},
+                          {'r', 3},
+                          {'s', 3},
+                          {'d', 2}};
+
   //
   // printWelcome();
   initializeBoard(playerOne);
   initializeBoard(playerTwo);
   printBoard(playerOne);
 
-  placeShips(playerOne, ship);
+  placeShips(playerOne, ship1);
+  while (!PlayerWins(ship1)) {
+        hit(playerOne);
+  }
   // placeShips(playerTwo, ship);
   // printBoard(playerTwo);
 

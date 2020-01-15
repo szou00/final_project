@@ -24,6 +24,7 @@
 #define SUBMARINE 's'
 #define DESTROYER 'd'
 #define HIT 'X'
+#define WATER '~'
 
 // #define NORTH 0
 // #define SOUTH 1
@@ -43,15 +44,17 @@ typedef struct coordinate {
 	int ycoor;
 } Coordinate;
 
+typedef struct ship {
+  char shipName;
+  int length;
+	int hits;
+} Ship;
+
 typedef struct cell {
 	char shipSymbol;
 	Coordinate position;
+	Ship thisShip;
 } Cell;
-
-typedef struct ship {
-  char shipName;
-  char length;
-} Ship;
 
 // typedef enum {
 // 	C_LENGTH = 5,
@@ -75,3 +78,5 @@ void printBoard (Cell Board[ROWS][COLS]);
 void placeShips (Cell Board[ROWS][COLS], Ship ships[]);
 void place (Cell Board[ROWS][COLS], Ship ship);
 void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]);
+void hit(Cell Board[ROWS][COLS]);
+int PlayerWins(Ship ships[]);
