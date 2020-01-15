@@ -30,12 +30,7 @@ int main() {
     Cell playerTwo[ROWS][COLS];       /* Player two game board */
 
     // Create ships
-    Ship ship1[NUM_SHIPS] = {{'c', 5}, /* Player one ships */
-                            {'b', 4},
-                            {'r', 3},
-                            {'s', 3},
-                            {'d', 2}};
-    Ship ship2[NUM_SHIPS] = {{'c', 5}, /* Player two ships */
+    Ship ship[NUM_SHIPS] = {{'c', 5}, /* Player one ships */
                             {'b', 4},
                             {'r', 3},
                             {'s', 3},
@@ -105,7 +100,7 @@ void readBoard(Cell Board[ROWS][COLS], char buffer[256], int socket){
       n = read(socket, buffer, 256);
       if (n < 0) {
         printf("error reading %d: %s\n", errno, strerror(errno));
-        exit();
+        exit(0);
       }
       printf("reading...\n");
       printf("%s\n", buffer);
@@ -149,6 +144,58 @@ void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]){
 //     return errno;
 //   }
 //   close(fd);
+//   return 0;
+// }
+//
+// int writeToFile(Cell Board[ROWS][COLS]) {
+//   int r,c;
+//   char next_line[1000];
+//   printf("trying to get in\n");
+//   //checking semaphore
+//   shmid = semget(KEY_2, 1, 0);
+//   if (shmid < 0) {
+//     printf("semaphore error %d: %s\n", errno, strerror(errno));
+//     return errno;
+//   }
+//   semop(shmid, &semaphore, 1);
+//   //checking memory
+//   shmd = shmget(KEY_1, sizeof(char *), 0);
+//   if (shmd < 0) {
+//     printf("memory error %d: %s\n", errno, strerror(errno));
+//     return errno;
+//   }
+//   //opening file
+//   FILE *fd = fopen("file.txt", "a");
+//   //printing last addition
+//   for (r=0; r<ROWS; r++) {
+//     for (c = 0; c<COLS;c++) {
+//       fprintf(fd, "%s", Board[r][c]);
+//     }
+//   }
+//   fclose(fd);
+//   //release memory
+//   strcpy(last_line, next_line);
+//   shmdt(last_line);
+//   semaphore.sem_op = 1;
+//   //release semaphore
+//   semop(shmd, &semaphore, 1);
+//   return 0;
+// }
+//
+// int viewGame() {
+//   FILE *fd = fopen("file.txt", "r");
+//   char lines;
+//   if (fd == NULL) {
+//     printf("error %d: %s\n", errno, strerror(errno));
+//     return errno;
+//   }
+//   lines = fgetc(fd);
+//   printf("the board:\n");
+//   while (lines != EOF) {
+//     printf("%c", lines);
+//     lines = fgetc(fd);
+//   }
+//   fclose(fd);
 //   return 0;
 // }
 

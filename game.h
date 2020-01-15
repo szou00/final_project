@@ -4,11 +4,21 @@
 #include <string.h>
 #include <errno.h>
 #include <time.h>
+#include <fcntl.h>
 
 #include <sys/shm.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
+
+#define KEY_1 24601
+#define KEY_2 24602
+
+int shmid;
+int shmd;
+int fd;
+union semun sm;
+struct sembuf semaphore;
 
 #define ROWS 10
 #define COLS 10
@@ -78,5 +88,9 @@ void printBoard (Cell Board[ROWS][COLS]);
 void placeShips (Cell Board[ROWS][COLS], Ship ships[]);
 void place (Cell Board[ROWS][COLS], Ship ship);
 void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]);
-void hit(Cell Board[ROWS][COLS]);
+void hit(Cell Board[ROWS][COLS], Ship ships[]);
 int PlayerWins(Ship ships[]);
+int createFile();
+int writeToFile();
+int viewGame();
+int removeFile();

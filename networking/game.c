@@ -85,16 +85,16 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
 
       if (orientation == 2) {
         x2 = x1;
-        printf("y2: %d\n", y2);
+        // printf("y2: %d\n", y2);
         if (y1+ships[i].length > ROWS) {
           y2 = y1 - ships[i].length;
         }
         else {
-          printf("y2: %d\n", y2);
+          // printf("y2: %d\n", y2);
           y2 = y1+ships[i].length;
         }
-        printf("ship length: %d\n", ships[i].length);
-        printf("y2: %d\n", y2);
+        // printf("ship length: %d\n", ships[i].length);
+        // printf("y2: %d\n", y2);
 
         valid = 1;
         int less, more;
@@ -126,16 +126,16 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
       else if (orientation == 1){
         y2 = y1;
         x2 = 0;
-        printf("x2: %d\n", x2);
+        // printf("x2: %d\n", x2);
         if (x1+ships[i].length > COLS) {
           x2 = x1 - ships[i].length;
         }
         else {
-          printf("x2: %d\n", x2);
+          // printf("x2: %d\n", x2);
           x2 = x1+ships[i].length;
         }
-        printf("ship length: %d\n", ships[i].length);
-        printf("x2: %d\n", x2);
+        // printf("ship length: %d\n", ships[i].length);
+        // printf("x2: %d\n", x2);
 
         int less, more;
         valid = 1;
@@ -147,13 +147,13 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
           less = x2;
           more = x1;
         }
-        printf("less: %d, more: %d\n", less, more);
+        // printf("less: %d, more: %d\n", less, more);
         for (int j = less; j <= more; j++){
           if (Board[y1][j].shipSymbol != ' '){
             valid = 0;
           }
         }
-        printf("valid: %d\n", valid);
+        // printf("valid: %d\n", valid);
         if (valid){
           for (int j = less; j < more; j++){
             Board[y1][j].shipSymbol = ships[i].shipName;
@@ -170,8 +170,8 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   }
 }
 
-void hit(Cell Board[ROWS][COLS]) {
-  int r, c;
+void hit(Cell Board[ROWS][COLS], Ship ships[]) {
+  int r, c, s;
   printf("Your turn! Which position would you like to hit?\n");
   printf("Enter the x-coordinate: ");
   scanf("%d", &c);
@@ -179,26 +179,29 @@ void hit(Cell Board[ROWS][COLS]) {
   scanf("%d", &r);
 
   int i = 0;
-  if (Board[r][c].shipSymbol != ' ') {
+  if (Board[r][c].shipSymbol != ' ') { //checking there is a ship
+    for (s = 0; s<5; s++) {
+      if (Board[r][c].shipSymbol == ships[s].shipName) {
+        ships[s].hits += 1; //adding hits to the corresponding ship
+      }
+    }
     Board[r][c].shipSymbol = HIT;
-    Board[r][c].thisShip.hits -= 1;
-    // printf("Number of hits: %d\n", Board[r][c].thisShip.hits);
   }
   else {
     Board[r][c].shipSymbol = WATER;
-    // printf("Oops, you hit water!\n");
   }
-
+  system("clear");
   printBoard(Board);
 }
 
 int PlayerWins(Ship ships[]) {
-  int n, sunk;
+  int n, sunk = 0;
   for (n = 0; n < 5; n++) {
-    if (ships[n].hits == ships[n].hits) {
+    if (ships[n].hits == ships[n].length) {
       sunk++;
     }
   }
+  printf("ships sunk: %d\n", sunk);
   if (sunk == 5) {
     printf("Player won!\n");
     return 1;

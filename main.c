@@ -21,14 +21,19 @@ int main(){
 
   //
   // printWelcome();
+  createFile();
   initializeBoard(playerOne);
   initializeBoard(playerTwo);
   printBoard(playerOne);
 
   placeShips(playerOne, ship1);
   while (!PlayerWins(ship1)) {
-        hit(playerOne);
+        hit(playerOne, ship1);
   }
+  writeToFile();
+  viewGame(playerOne);
+  removeFile();
+
   // placeShips(playerTwo, ship);
   // printBoard(playerTwo);
 
