@@ -21,18 +21,33 @@ int main(){
 
   //
   // printWelcome();
-  createFile();
+  // createFile();
   initializeBoard(playerOne);
-  viewGame();
+  // viewGame();
   initializeBoard(playerTwo);
-  printBoard(playerOne);
 
+  printf("Hey Player One! Place your ships:\n");
   placeShips(playerOne, ship1);
-  writeToFile(playerOne);
-  while (!PlayerWins(ship1)) {
-        hit(playerOne, ship1);
+  // writeToFile(playerOne);
+  system("clear");
+  printf("Hey Player Two! Place your ships\n");
+  placeShips(playerTwo, ship2);
+  system("clear");
+  int p = 0; //0 is player one
+  while (!PlayerWins(ship1) && !PlayerWins(ship2)) {
+    if (p == 0) { //player one goes
+      printf("Player One, ");
+      hit(playerTwo, ship2); //they use player 2's board and ship
+      p = 1;
+    }
+    else { //player two goes
+      printf("Player Two, ");
+      hit(playerOne, ship2); //they use player 1's board and ship 
+      p = 0;
+    }
+
   }
-  removeFile();
+  // removeFile();
 
   // placeShips(playerTwo, ship);
   // printBoard(playerTwo);

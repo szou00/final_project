@@ -64,6 +64,7 @@ void printBoard(Cell Board[ROWS][COLS]) {
 }
 
 void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
+  printBoard(Board);
   int x1, x2, y1, y2, orientation, valid;
   for (int i = 0; i < NUM_SHIPS; i++){
     int placed = 0;
@@ -177,7 +178,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
 
 void hit(Cell Board[ROWS][COLS], Ship ships[]) {
   int r, c, s;
-  printf("Your turn! Which position would you like to hit?\n");
+  printf("which position would you like to hit?\n");
   printf("Enter the x-coordinate: ");
   scanf("%d", &c);
   printf("Enter the y-coordinate: ");
