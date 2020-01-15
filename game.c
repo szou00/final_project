@@ -259,11 +259,20 @@ int writeToFile(Cell Board[ROWS][COLS]) {
   }
   //opening file
   FILE *fd = fopen("file.txt", "w");
-  //printing last addition
+
   for (r=0; r<ROWS; r++) {
     for (c = 0; c<COLS;c++) {
-      fprintf(fd, "%c", Board[r][c].shipSymbol);
+      if (Board[r][c].shipSymbol != ' ') {
+        // printf("%c", Board[r][c].shipSymbol);
+        fputc(Board[r][c].shipSymbol, fd);
+        fputc(' ', fd);
+      }
+      else {
+        fputc('0', fd);
+        fputc(' ', fd);
+      }
     }
+    fputc('\n', fd);
   }
   fclose(fd);
   //release memory
@@ -274,6 +283,7 @@ int writeToFile(Cell Board[ROWS][COLS]) {
 }
 
 int viewGame() {
+  printf("viewing\n");
   FILE *fd = fopen("file.txt", "r");
   char lines;
   if (fd == NULL) {
@@ -282,11 +292,15 @@ int viewGame() {
   }
   lines = fgetc(fd);
   printf("the board:\n");
+  if (lines == EOF) {
+    printf("End of file\n");
+  }
   while (lines != EOF) {
-    printf("%c", lines);
+    printf("printing: %c", lines);
     lines = fgetc(fd);
   }
   fclose(fd);
+  printf("finishing printing game.\n");
   return 0;
 }
 

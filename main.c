@@ -23,15 +23,15 @@ int main(){
   // printWelcome();
   createFile();
   initializeBoard(playerOne);
+  viewGame();
   initializeBoard(playerTwo);
   printBoard(playerOne);
 
   placeShips(playerOne, ship1);
+  writeToFile(playerOne);
   while (!PlayerWins(ship1)) {
         hit(playerOne, ship1);
   }
-  writeToFile();
-  viewGame(playerOne);
   removeFile();
 
   // placeShips(playerTwo, ship);
