@@ -24,9 +24,9 @@ int main(){
   // printWelcome();
   initializeBoard(playerOne);
   initializeBoard(playerTwo);
+  printBoard(playerOne);
 
   placeShips(playerOne, ship);
-  printBoard(playerOne);
   // placeShips(playerTwo, ship);
   // printBoard(playerTwo);
 
