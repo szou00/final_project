@@ -76,6 +76,10 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
       scanf("%d", &x1);
       printf("Enter the y-coordinate of initial position: ");
       scanf("%d", &y1);
+      // ships[i].coordinates[0].xcoor = x1;
+      // printf("x: %d\n", ships[i].coordinates[0].xcoor);
+      // ships[i].coordinates[0].ycoor = y1;
+      // printf("y: %d\n", ships[i].coordinates[0].ycoor);
       printf("Enter the x-coordinate of final position: ");
       scanf("%d", &x2);
       printf("Enter the y-coordinate of final position: ");
@@ -107,7 +111,13 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
           }
           if (valid){
             for (int j = less; j <= more; j++){
+              int scoord = 0;
               Board[j][x1].shipSymbol = ships[i].shipName;
+              ships[i].coordinates[scoord].xcoor = j;
+              ships[i].coordinates[scoord].ycoor = x1;
+              scoord++;
+              printf("ship x: %d\n", ships[i].coordinates[scoord].xcoor);
+              printf("ship y: %d\n", ships[i].coordinates[scoord].ycoor);
             }
             placed = 1;
             printBoard(Board);
@@ -138,7 +148,13 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
           }
           if (valid){
             for (int j = less; j <= more; j++){
+              int scoord;
               Board[y1][j].shipSymbol = ships[i].shipName;
+              ships[i].coordinates[scoord].xcoor = y1;
+              ships[i].coordinates[scoord].ycoor = j;
+              scoord++;
+              printf("ship x: %d\n", ships[i].coordinates[scoord].xcoor);
+              printf("ship y: %d\n", ships[i].coordinates[scoord].ycoor);
             }
             placed = 1;
             printBoard(Board);
@@ -149,13 +165,13 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   }
 }
 
-void hit(Board[ROWS][COLS], Ship ships[], int xcoor, int ycoor) {
-  int i = 0;
-  if (Board[xcoor][ycoor] != 0) {
-    Board[xcoor][ycoor].shipSymbol == HIT;
-    for (i = 0; i++; )
-  }
-}
+// void hit(Board[ROWS][COLS], Ship ships[], int xcoor, int ycoor) {
+//   int i = 0;
+//   if (Board[xcoor][ycoor] != 0) {
+//     strcpy(Board[xcoor][ycoor].shipSymbol,HIT);
+//     for (i = 0; i++; )
+//   }
+// }
 
 
 // void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]) {
