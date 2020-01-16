@@ -212,12 +212,22 @@ int PlayerWins(Ship ships[]) {
     }
     // printf("ship hits: %d\n", ships[n].hits);
   }
-  printf("ships sunk: %d\n", sunk);
   if (sunk == 5) {
     printf("Player won!\n");
     return 1;
   }
   return 0;
+}
+
+int checkShips(Ship ships[]) {
+  int n, sunk = 0;
+  for (n = 0; n < 5; n++) {
+    if (ships[n].hits == ships[n].length) {
+      sunk++;
+    }
+  }
+  printf("You have sunk %d ships so far!\n", sunk);
+  return sunk;
 }
 
 int createFile() {
