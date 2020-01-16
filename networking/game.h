@@ -10,6 +10,15 @@
 #include <sys/ipc.h>
 #include <sys/sem.h>
 
+#define KEY_1 24601
+#define KEY_2 24602
+
+int shmid;
+int shmd;
+int fd;
+union semun sm;
+struct sembuf semaphore;
+
 #define ROWS 10
 #define COLS 10
 
@@ -24,6 +33,11 @@
 #define SUBMARINE 's'
 #define DESTROYER 'd'
 #define HIT 'X'
+#define WATER '~'
+
+#define SHSIZE 100
+#define KEY_1 24601
+#define KEY_2 24602
 
 // #define NORTH 0
 // #define SOUTH 1
@@ -43,15 +57,17 @@ typedef struct coordinate {
 	int ycoor;
 } Coordinate;
 
+typedef struct ship {
+  char shipName;
+  int length;
+	int hits;
+} Ship;
+
 typedef struct cell {
 	char shipSymbol;
 	Coordinate position;
+	Ship thisShip;
 } Cell;
-
-typedef struct ship {
-  char shipName;
-  char length;
-} Ship;
 
 // typedef enum {
 // 	C_LENGTH = 5,
@@ -75,3 +91,5 @@ void printBoard (Cell Board[ROWS][COLS]);
 void placeShips (Cell Board[ROWS][COLS], Ship ships[]);
 void place (Cell Board[ROWS][COLS], Ship ship);
 void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]);
+void hit(Cell Board[ROWS][COLS], Ship ships[]);
+int PlayerWins(Ship ships[]);
