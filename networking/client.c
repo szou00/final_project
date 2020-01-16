@@ -49,12 +49,15 @@ int main(int argc, char **argv) {
   while (1) {
     system("clear");
     printGame(playerTwo, playerOne);
-    printf("enter data: ");
-    fgets(buffer, sizeof(buffer), stdin);
-    *strchr(buffer, '\n') = 0;
-    write(server_socket, buffer, sizeof(buffer));
-    read(server_socket, buffer, sizeof(buffer));
-    printf("received: [%s]\n", buffer);
+    printf("Your turn!");
+    // printf("enter data: ");
+    // fgets(buffer, sizeof(buffer), stdin);
+    // *strchr(buffer, '\n') = 0;
+    read(server_socket, playerTwo, sizeof(playerTwo));
+    hit(playerOne, ship);
+    write(server_socket, playerOne, sizeof(playerOne));
+
+    // printf("received: [%s]\n", buffer);
   }
 }
 
@@ -78,6 +81,7 @@ void sendBoard(Cell Board[ROWS][COLS], char buffer[256], int socket){
 }
 
 void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]){
+  system("clear");
   printf("Player One's Board\n\n");
   printBoard(opp);
   printf("\n\n\nYour Board\n\n");
