@@ -32,16 +32,23 @@ int main(int argc, char **argv) {
   printBoard(playerTwo);
 
   placeShips(playerTwo, ship);
+  printf("Waiting for Player One...\n");
 
+
+  // sendBoard(playerTwo, buffer, server_socket);
+  // readBoard(playerOne, buffer, server_socket);
+  write(server_socket, playerTwo, sizeof(playerTwo));
+  read(server_socket, playerOne, sizeof(playerOne));
+  printf("TESTING: %c\n\n", playerOne[2][3].shipSymbol);
   printGame(playerTwo, playerOne);
-
-  sendBoard(playerTwo, buffer, server_socket);
-  readBoard(playerOne, buffer, server_socket);
   // read(server_socket, bufferb, sizeof(bufferb));
+  printf("Waiting for Player One...\n");
+  printf("Both players are ready! Game is starting...\n\n");
+  sleep(3);
 
   while (1) {
     system("clear");
-    printGame(playerOne, playerTwo);
+    printGame(playerTwo, playerOne);
     printf("enter data: ");
     fgets(buffer, sizeof(buffer), stdin);
     *strchr(buffer, '\n') = 0;
@@ -54,8 +61,8 @@ int main(int argc, char **argv) {
 void readBoard(Cell Board[ROWS][COLS], char buffer[256], int socket){
   for (int i = 0; i < 10; i++){
     for (int j = 0; j < 10; j++){
-      // read(socket, buffer, 256);
-      fgets(buffer, 256, socket);
+      read(socket, buffer, 256);
+      // fgets(buffer, 256, socket);
       Board[i][j].shipSymbol = buffer[0];
     }
   }
