@@ -59,8 +59,8 @@ int main() {
 
   while (!PlayerWins(ship1) && !(PlayerWins(ship2))) {
 
-    printShips(ship1, ship2);
     system("clear");
+    printShips(ship1, ship2);
     printGame(playerOne, playerTwo);
     hit(playerTwo, ship2);
     write(client_socket, playerTwo, sizeof(playerTwo));
@@ -128,9 +128,8 @@ void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]){
 }
 
 void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {
-  system("clear");
-  printf("Player Two's Ships\n\n");
+  printf("Player Two's Ships\n");
   printMyShips(opp);
-  printf("Player One's Ships\n\n");
+  printf("My Ships\n");
   printMyShips(me);
 }

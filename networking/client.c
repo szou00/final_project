@@ -55,11 +55,11 @@ int main(int argc, char **argv) {
 
   while (!PlayerWins(ship1) && !(PlayerWins(ship2))) {
 
-    printShips(ship2, ship1);
     system("clear");
+    printShips(ship2, ship1);
     printGame(playerTwo, playerOne);
     read(server_socket, playerTwo, sizeof(playerTwo));
-    read(server_socket, ship1, sizeof(ship1));
+    read(server_socket, ship2, sizeof(ship2));
     hit(playerOne, ship1);
     write(server_socket, playerOne, sizeof(playerOne));
     write(server_socket, ship1, sizeof(ship1));
@@ -96,9 +96,8 @@ void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]){
 }
 
 void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {
-  system("clear");
-  printf("Player Two's Ships\n\n");
-  printMyShips(opp);
   printf("Player One's Ships\n\n");
+  printMyShips(opp);
+  printf("My Ships\n\n");
   printMyShips(me);
 }
