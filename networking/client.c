@@ -32,7 +32,6 @@ int main(int argc, char **argv) {
   // printWelcome();
   initializeBoard(playerOne);
   initializeBoard(playerTwo);
-  printBoard(playerTwo);
 
   placeShips(playerTwo, ship2);
   printf("Waiting for Player One...\n");
@@ -64,8 +63,14 @@ int main(int argc, char **argv) {
     write(server_socket, playerOne, sizeof(playerOne));
     write(server_socket, ship1, sizeof(ship1));
   }
+  if (PlayerWins(ship1)) {
+    printf("Player one won!!\n");
+  }
+  else {
+    printf("Player two won :(\n");
+  }
   close(server_socket);
-
+  exit(0);
 }
 
 void readBoard(Cell Board[ROWS][COLS], char buffer[256], int socket){
@@ -92,7 +97,7 @@ void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]){
   printf("Player One's Board\n\n");
   printBoard(opp);
   printf("\n\n\nYour Board\n\n");
-  printBoard(me);
+  displayShips(me);
 }
 
 void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {

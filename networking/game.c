@@ -40,7 +40,7 @@ void initializeBoard(Cell Board[ROWS][COLS]) {
   }
 }
 
-void printBoard(Cell Board[ROWS][COLS]) {
+void displayShips(Cell Board[ROWS][COLS]) {
   int nums[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
   int n = 0;
   printf("  ");
@@ -53,10 +53,33 @@ void printBoard(Cell Board[ROWS][COLS]) {
     printf("%d ", nums[r]);
 		for (int c = 0; c < COLS; c++) {
       if (Board[r][c].shipSymbol == ' ') {
-        printf("0 ");
+        printf("* ");
       }
       else{
         printf("%c ", Board[r][c].shipSymbol);
+      }
+    }
+    printf("\n");
+  }
+}
+
+void printBoard(Cell Board[ROWS][COLS]) {
+  int nums[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  int n = 0;
+  printf("  ");
+  while (n<10) {
+    printf("%d ", nums[n]);
+    n++;
+  }
+  printf("\n");
+	for (int r = 0; r < ROWS; r++) {
+    printf("%d ", nums[r]);
+		for (int c = 0; c < COLS; c++) {
+      if (Board[r][c].shipSymbol == HIT || Board[r][c].shipSymbol == WATER) {
+        printf("%c ", Board[r][c].shipSymbol);
+      }
+      else {
+        printf("* ");
       }
     }
     printf("\n");
@@ -71,6 +94,7 @@ void printMyShips(Ship ships[NUM_SHIPS]) {
 }
 
 void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
+  displayShips(Board);
   int x1, x2, y1, y2, orientation, valid;
   for (int i = 0; i < NUM_SHIPS; i++){
     int placed = 0;
@@ -124,7 +148,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
             }
             placed = 1;
             system("clear");
-            printBoard(Board);
+            displayShips(Board);
           }
           else {
             printf("Ships overlapping\n");
@@ -167,7 +191,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
           }
           placed = 1;
           system("clear");
-          printBoard(Board);
+          displayShips(Board);
         }
         else {
           printf("ships are overlapping\n");

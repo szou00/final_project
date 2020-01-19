@@ -34,7 +34,6 @@ int main() {
   // printWelcome();
   initializeBoard(playerOne);
   initializeBoard(playerTwo);
-  printBoard(playerOne);
 
   placeShips(playerOne, ship1);
 
@@ -124,7 +123,7 @@ void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]){
   printf("Player Two's Board\n\n");
   printBoard(opp);
   printf("\n\n\nYour Board\n\n");
-  printBoard(me);
+  displayShips(me);
 }
 
 void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {
