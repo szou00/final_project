@@ -1,9 +1,10 @@
- #include "networking.h"
+#include "networking.h"
 #include "game.h"
 
 void readBoard(Cell Board[ROWS][COLS], char buffer[256], int socket);
 void sendBoard(Cell Board[ROWS][COLS], char buffer[256], int socket);
 void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]);
+void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]);
 
 int main(int argc, char **argv) {
 
@@ -20,18 +21,20 @@ int main(int argc, char **argv) {
   Cell playerTwo[ROWS][COLS];       /* Player two game board */
 
   // Create ships
-  Ship ship[NUM_SHIPS] = {{'c', 5},
-                         {'b', 4},
-                         {'r', 3},
-                         {'s', 3},
-                         {'d', 2}};
+  Ship ship1[NUM_SHIPS] = {{'c', 5},
+                          {'b', 4},
+                          {'r', 3},
+                          {'s', 3},
+                          {'d', 2}};
+
+  Ship ship2[NUM_SHIPS] = {{'c', 5}, {'b', 4}, {'r', 3}, {'s', 3}, {'d', 2}};
 
   // printWelcome();
   initializeBoard(playerOne);
   initializeBoard(playerTwo);
   printBoard(playerTwo);
 
-  placeShips(playerTwo, ship);
+  placeShips(playerTwo, ship2);
   printf("Waiting for Player One...\n");
 
 
@@ -39,6 +42,10 @@ int main(int argc, char **argv) {
   // readBoard(playerOne, buffer, server_socket);
   write(server_socket, playerTwo, sizeof(playerTwo));
   read(server_socket, playerOne, sizeof(playerOne));
+
+  write(server_socket, ship2, sizeof(ship2));
+  read(server_socket, ship1, sizeof(ship1));
+
   printf("TESTING: %c\n\n", playerOne[2][3].shipSymbol);
   printGame(playerTwo, playerOne);
   // read(server_socket, bufferb, sizeof(bufferb));
@@ -46,19 +53,19 @@ int main(int argc, char **argv) {
   printf("Both players are ready! Game is starting...\n\n");
   sleep(3);
 
-  while (1) {
+  while (!PlayerWins(ship1) && !(PlayerWins(ship2))) {
+
+    printShips(ship2, ship1);
     system("clear");
     printGame(playerTwo, playerOne);
-    printf("Your turn!");
-    // printf("enter data: ");
-    // fgets(buffer, sizeof(buffer), stdin);
-    // *strchr(buffer, '\n') = 0;
     read(server_socket, playerTwo, sizeof(playerTwo));
-    hit(playerOne, ship);
+    read(server_socket, ship1, sizeof(ship1));
+    hit(playerOne, ship1);
     write(server_socket, playerOne, sizeof(playerOne));
-
-    // printf("received: [%s]\n", buffer);
+    write(server_socket, ship1, sizeof(ship1));
   }
+  close(server_socket);
+
 }
 
 void readBoard(Cell Board[ROWS][COLS], char buffer[256], int socket){
@@ -86,4 +93,12 @@ void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]){
   printBoard(opp);
   printf("\n\n\nYour Board\n\n");
   printBoard(me);
+}
+
+void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {
+  system("clear");
+  printf("Player Two's Ships\n\n");
+  printMyShips(opp);
+  printf("Player One's Ships\n\n");
+  printMyShips(me);
 }

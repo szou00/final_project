@@ -83,8 +83,6 @@ typedef struct cell {
 //   int positiony; //y-coordinate of position
 // } cell;
 
-
-
 void printWelcome ();
 void initializeBoard (Cell Board[ROWS][COLS]);
 void printBoard (Cell Board[ROWS][COLS]);
@@ -93,3 +91,4 @@ void place (Cell Board[ROWS][COLS], Ship ship);
 void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]);
 void hit(Cell Board[ROWS][COLS], Ship ships[]);
 int PlayerWins(Ship ships[]);
+void printMyShips(Ship ships[NUM_SHIPS]);

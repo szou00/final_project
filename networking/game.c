@@ -63,6 +63,13 @@ void printBoard(Cell Board[ROWS][COLS]) {
   }
 }
 
+void printMyShips(Ship ships[NUM_SHIPS]) {
+  int i, n = 0;
+  for (i = 0; i<NUM_SHIPS; i++) {
+    printf("%c : %d \n", ships[i].shipName, ships[i].hits);
+  }
+}
+
 void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   int x1, x2, y1, y2, orientation, valid;
   for (int i = 0; i < NUM_SHIPS; i++){
@@ -203,7 +210,7 @@ int PlayerWins(Ship ships[]) {
   }
   printf("ships sunk: %d\n", sunk);
   if (sunk == 5) {
-    printf("Player won!\n");
+    // printf("Player won!\n");
     return 1;
   }
   return 0;
