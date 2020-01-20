@@ -1,4 +1,5 @@
 DEVLOG
+*note: we had an older version of a DEVLOG but due to wrong formatting we removed it and copied everything to this file instead
 
 - December 27 2019
 * William + Sharon: Worked on proposal
@@ -27,7 +28,7 @@ DEVLOG
 * Sharon: Finished working on getting the game to end when a player wins. In order to do this, I wrote code for printing out the number of ships that sank.
 
 - January 17 2019
-* Tested out networking along with the code for hitting and winning. Only one side of the socket actually closes upon win. Cleaned up a few things and fixed some error with the winning.
+* Sharon: Tested out networking along with the code for hitting and winning. Only one side of the socket actually closes upon win. Cleaned up a few things and fixed some error with the winning.
 
 - January 19 2019
-* Got both sides of the socket to close when one player wins. Worked on displays: the opponent can't see the other player's ships (only see a board with hits/misses); the two boards are now displayed side by side for easy viewing; ships are printed out below the boards.
+* Sharon: Got both sides of the socket to close when one player wins. Worked on displays: the opponent can't see the other player's ships (only see a board with hits/misses); the two boards are now displayed side by side for easy viewing; ships are printed out below the boards.
