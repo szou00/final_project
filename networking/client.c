@@ -15,6 +15,18 @@ int main(int argc, char **argv) {
   else
     server_socket = client_setup( TEST_IP );
 
+  //create Players
+  Players players;
+
+  /**initialize name for player two**/
+  char buf[20];
+  printf("Enter your name: ");
+  fgets(buf, 20, stdin);
+  buf[strcspn(buf, "\n")] = 0;
+  memcpy(&players.playerTwoName, buf, sizeof(buf));
+  printf("Hey %s! Let's get started.\n", players.playerTwoName);
+  /**/
+
   // Create the game boards for both players
   Cell playerOne[ROWS][COLS];       /* Player one game board */
   Cell playerTwo[ROWS][COLS];       /* Player two game board */
@@ -44,10 +56,15 @@ int main(int argc, char **argv) {
   write(server_socket, ship2, sizeof(ship2));
   read(server_socket, ship1, sizeof(ship1));
 
+  write(server_socket, players.playerTwoName, sizeof(players.playerTwoName));
+  read(server_socket, players.playerOneName, sizeof(players.playerOneName));
+  // printf("You are: %s\n", playerTwoName.getName);
+  // printf("Your opponent is: %s\n", playerOneName.getName);
+
   printf("TESTING: %c\n\n", playerOne[2][3].shipSymbol);
   printGame(playerTwo, playerOne);
   // read(server_socket, bufferb, sizeof(bufferb));
-  printf("Waiting for Player One...\n");
+  printf("Waiting for Player One %s...\n", players.playerOneName);
   printf("Both players are ready! Game is starting...\n\n");
   sleep(3);
 
@@ -63,10 +80,10 @@ int main(int argc, char **argv) {
     write(server_socket, ship1, sizeof(ship1));
   }
   if (PlayerWins(ship1)) {
-    printf("Player one won!!\n");
+    printf("%s won!!\n", players.playerOneName);
   }
   else {
-    printf("Player two won :(\n");
+    printf("%s won :(\n", players.playerTwoName);
   }
   close(server_socket);
   exit(0);

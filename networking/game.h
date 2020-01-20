@@ -11,15 +11,6 @@
 #include <sys/ipc.h>
 #include <sys/sem.h>
 
-#define KEY_1 24601
-#define KEY_2 24602
-
-int shmid;
-int shmd;
-int fd;
-union semun sm;
-struct sembuf semaphore;
-
 #define ROWS 10
 #define COLS 10
 
@@ -27,6 +18,7 @@ struct sembuf semaphore;
 
 #define PLAYER_ONE 1
 #define PLAYER_TWO 2
+#define NAME_SIZE 20
 
 #define CARRIER 'c'
 #define BATTLESHIP 'b'
@@ -35,10 +27,6 @@ struct sembuf semaphore;
 #define DESTROYER 'd'
 #define HIT 'X'
 #define WATER '~'
-
-#define SHSIZE 100
-#define KEY_1 24601
-#define KEY_2 24602
 
 // #define NORTH 0
 // #define SOUTH 1
@@ -69,6 +57,11 @@ typedef struct cell {
 	Coordinate position;
 	Ship thisShip;
 } Cell;
+
+typedef struct players {
+	char playerOneName[20];
+	char playerTwoName[20];
+} Players;
 
 // typedef enum {
 // 	C_LENGTH = 5,
