@@ -16,6 +16,8 @@ int main() {
   printf("Waiting for Player Two to connect...\n");
   int client_socket = server_connect(listen_socket);
   printf("Player Two has connected! Now starting the game. \n");
+  sleep(3);
+  system("clear");
 
   //create players
   Players players;
@@ -63,10 +65,11 @@ int main() {
   // printf("You are: %s\n", playerOneName.getName);
   // printf("Your opponent is: %s\n", playerTwoName.getName);
 
-  printf("TESTING: %c\n\n", playerTwo[2][3].shipSymbol);
+  // printf("TESTING: %c\n\n", playerTwo[2][3].shipSymbol);
   // sendBoard(playerTwo, buffer, client_socket);
   printGame(playerOne, playerTwo);
-  printf("Waiting for Player Two %s...\n", players.playerTwoName);
+  printf("Your opponent is %s!\n", players.playerTwoName);
+  printf("Waiting for %s...\n", players.playerTwoName);
 
   printf("Both players are ready! Game is starting...\n\n");
   sleep(3);
@@ -77,16 +80,17 @@ int main() {
     printGame(playerOne, playerTwo);
     printShips(ship1, ship2);
     hit(playerTwo, ship2);
+    sleep(1);
     write(client_socket, playerTwo, sizeof(playerTwo));
     write(client_socket, ship2, sizeof(ship2));
     read(client_socket, playerOne, sizeof(playerOne));
     read(client_socket, ship1, sizeof(ship1));
   }
   if (PlayerWins(ship1)) {
-    printf("Player one won!!\n");
+    printf("Awesome, you won!\n");
   }
   else {
-    printf("Player two won :(\n");
+    printf("%s won :( Better luck next time!\n", players.playerTwoName);
   }
   close(client_socket);
   exit(0);

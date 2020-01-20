@@ -67,7 +67,7 @@ void printBoards(Cell Board[ROWS][COLS], Cell opp[ROWS][COLS]) {
   int nums[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
   int n = 0;
 
-  printf("Your Board\t\t\tPlayer Two's Board\n\n");
+  printf("Your Board\t\t\tPlayer Two's Board\n");
   printf("  ");
   while (n<10) {
     printf("%d ", nums[n]);
@@ -190,7 +190,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
             printBoard(Board);
           }
           else {
-            printf("Ships overlapping\n");
+            printf("There is already a ship in that position, please choose another.\n");
           }
         }
       else if (orientation == 1){
@@ -233,7 +233,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
           printBoard(Board);
         }
         else {
-          printf("ships are overlapping\n");
+          printf("There is already a ship in that position, please choose another.\n");
         }
       }
     }
@@ -251,8 +251,8 @@ int isValidCoord(int coordinate) {
   return 0;
 }
 
-void hit(Cell Board[ROWS][COLS], Ship ships[]) {
-  int r, c, s;
+int hit(Cell Board[ROWS][COLS], Ship ships[]) {
+  int r, c, s, success = 0;
   printf("Your turn! Which position would you like to hit?\n");
   printf("Enter the x-coordinate: ");
   scanf("%d", &c);
@@ -266,13 +266,15 @@ void hit(Cell Board[ROWS][COLS], Ship ships[]) {
         ships[s].hits += 1; //adding hits to the corresponding ship
       }
     }
+    printf("You hit a %c ship!\n", Board[r][c].shipSymbol);
     Board[r][c].shipSymbol = HIT;
+    success = 1;
   }
   else {
     Board[r][c].shipSymbol = WATER;
+    printf("Oops - you didn't hit anything\n");
   }
-  system("clear");
-  // printBoard(Board);
+  return success;
 }
 
 int PlayerWins(Ship ships[]) {

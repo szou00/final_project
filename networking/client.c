@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
   Players players;
 
   /**initialize name for player two**/
+  system("clear");
   char buf[20];
   printf("Enter your name: ");
   fgets(buf, 20, stdin);
@@ -45,7 +46,7 @@ int main(int argc, char **argv) {
   initializeBoard(playerTwo);
 
   placeShips(playerTwo, ship2);
-  printf("Waiting for Player One...\n");
+  printf("Waiting for Player One...");
 
 
   // sendBoard(playerTwo, buffer, server_socket);
@@ -61,10 +62,10 @@ int main(int argc, char **argv) {
   // printf("You are: %s\n", playerTwoName.getName);
   // printf("Your opponent is: %s\n", playerOneName.getName);
 
-  printf("TESTING: %c\n\n", playerOne[2][3].shipSymbol);
-  printGame(playerTwo, playerOne);
+  // printf("TESTING: %c\n\n", playerOne[2][3].shipSymbol);
+  // printGame(playerTwo, playerOne);
   // read(server_socket, bufferb, sizeof(bufferb));
-  printf("Waiting for Player One %s...\n", players.playerOneName);
+  printf("Your opponent is ...%s!\n", players.playerOneName);
   printf("Both players are ready! Game is starting...\n\n");
   sleep(3);
 
@@ -76,14 +77,15 @@ int main(int argc, char **argv) {
     read(server_socket, playerTwo, sizeof(playerTwo));
     read(server_socket, ship2, sizeof(ship2));
     hit(playerOne, ship1);
+    sleep(1);
     write(server_socket, playerOne, sizeof(playerOne));
     write(server_socket, ship1, sizeof(ship1));
   }
   if (PlayerWins(ship1)) {
-    printf("%s won!!\n", players.playerOneName);
+    printf("%s won :( Better luck next time!\n", players.playerOneName);
   }
   else {
-    printf("%s won :(\n", players.playerTwoName);
+    printf("Awesome, you won! \n");
   }
   close(server_socket);
   exit(0);
