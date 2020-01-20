@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
   // printf("TESTING: %c\n\n", playerOne[2][3].shipSymbol);
   // printGame(playerTwo, playerOne);
   // read(server_socket, bufferb, sizeof(bufferb));
-  printf("Your opponent is ...%s!\n", players.playerOneName);
+  printf("Your opponent is: %s!\n", players.playerOneName);
   printf("Both players are ready! Game is starting...\n\n");
   sleep(3);
 

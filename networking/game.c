@@ -173,8 +173,8 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
             more = y2;
           }
           else{
-            less = y2;
-            more = y1;
+            less = y2+1;
+            more = y1+1;
           }
           for (int j = less; j <= more; j++){
             if (Board[j][x1].shipSymbol != ' '){
@@ -214,8 +214,8 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
           more = x2;
         }
         else{
-          less = x2;
-          more = x1;
+          less = x2+1;
+          more = x1+1;
         }
         // printf("less: %d, more: %d\n", less, more);
         for (int j = less; j <= more; j++){
