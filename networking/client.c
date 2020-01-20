@@ -94,10 +94,7 @@ void sendBoard(Cell Board[ROWS][COLS], char buffer[256], int socket){
 
 void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]){
   system("clear");
-  printf("Player One's Board\n\n");
-  printBoard(opp);
-  printf("\n\n\nYour Board\n\n");
-  displayShips(me);
+  printBoards(me, opp);
 }
 
 void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {

@@ -86,6 +86,51 @@ void printBoard(Cell Board[ROWS][COLS]) {
   }
 }
 
+void printBoards(Cell Board[ROWS][COLS], Cell opp[ROWS][COLS]) {
+  int nums[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  int n = 0;
+
+  printf("Your Board\t\t\tPlayer Two's Board\n\n");
+  printf("  ");
+  while (n<10) {
+    printf("%d ", nums[n]);
+    n++;
+  }
+  //printing board 2
+  printf("\t\t");
+  n = 0;
+  printf("  ");
+  while (n<10) {
+    printf("%d ", nums[n]);
+    n++;
+  }
+
+  printf("\n");
+	for (int r = 0; r < ROWS; r++) {
+    printf("%d ", nums[r]);
+		for (int c = 0; c < COLS; c++) {
+      if (Board[r][c].shipSymbol == ' ') {
+        printf("* ");
+      }
+      else{
+        printf("%c ", Board[r][c].shipSymbol);
+      }
+    }
+    //printing Board 2
+    printf("\t\t");
+    printf("%d ", nums[r]);
+    for (int c = 0; c < COLS; c++) {
+      if (opp[r][c].shipSymbol == HIT || opp[r][c].shipSymbol == WATER) {
+        printf("%c ", opp[r][c].shipSymbol);
+      }
+      else {
+        printf("* ");
+      }
+    }
+    printf("\n");
+  }
+}
+
 void printMyShips(Ship ships[NUM_SHIPS]) {
   int i, n = 0;
   for (i = 0; i<NUM_SHIPS; i++) {
