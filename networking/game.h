@@ -91,6 +91,5 @@ void place (Cell Board[ROWS][COLS], Ship ship);
 void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]);
 void hit(Cell Board[ROWS][COLS], Ship ships[]);
 int PlayerWins(Ship ships[]);
-void printMyShips(Ship ships[NUM_SHIPS]);
-void displayShips(Cell Board[ROWS][COLS]);
+void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]);
 void printBoards(Cell Board[ROWS][COLS], Cell opp[ROWS][COLS]);

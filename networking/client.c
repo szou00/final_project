@@ -4,7 +4,6 @@
 void readBoard(Cell Board[ROWS][COLS], char buffer[256], int socket);
 void sendBoard(Cell Board[ROWS][COLS], char buffer[256], int socket);
 void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]);
-void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]);
 
 int main(int argc, char **argv) {
 
@@ -55,8 +54,8 @@ int main(int argc, char **argv) {
   while (!PlayerWins(ship1) && !(PlayerWins(ship2))) {
 
     system("clear");
-    printShips(ship2, ship1);
     printGame(playerTwo, playerOne);
+    printShips(ship2, ship1);
     read(server_socket, playerTwo, sizeof(playerTwo));
     read(server_socket, ship2, sizeof(ship2));
     hit(playerOne, ship1);
@@ -95,11 +94,4 @@ void sendBoard(Cell Board[ROWS][COLS], char buffer[256], int socket){
 void printGame(Cell me[ROWS][COLS], Cell opp[ROWS][COLS]){
   system("clear");
   printBoards(me, opp);
-}
-
-void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {
-  printf("Player One's Ships\n\n");
-  printMyShips(opp);
-  printf("My Ships\n\n");
-  printMyShips(me);
 }
