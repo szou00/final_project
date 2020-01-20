@@ -230,187 +230,60 @@ int checkShips(Ship ships[]) {
   return sunk;
 }
 
-int createFile() {
-  shmid = semget(KEY_2, 1, IPC_CREAT | 0644);
-  if (shmid < 0) {
-    printf("SEMAPHORE error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-  semctl(shmid, 0, SETVAL, sm);
-  shmd = shmget(KEY_1, sizeof(char *), IPC_CREAT | 0644);
-  if (shmd < 0) {
-    printf("MEMORY error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-  fd = open("file.txt", O_CREAT | O_TRUNC | O_RDWR, 0644);
-  if (fd < 0) {
-    printf("FILE error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-  close(fd);
-  return 0;
-}
 
-int writeToFile(Cell Board[ROWS][COLS]) {
-  int r,c;
-  char next_line[1000];
-  printf("trying to get in\n");
-  //checking semaphore
-  shmid = semget(KEY_2, 1, 0);
-  if (shmid < 0) {
-    printf("semaphore error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-  semop(shmid, &semaphore, 1);
-  //checking memory
-  shmd = shmget(KEY_1, sizeof(char *), 0);
-  if (shmd < 0) {
-    printf("memory error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-  //opening file
-  FILE *fd = fopen("file.txt", "w");
+void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]) {
+  int x1, y1, x2, y2;
+  int o;
+  int placing = 1;
+  int i = NUM_SHIPS;
+  srand(time(0));
 
-  for (r=0; r<ROWS; r++) {
-    for (c = 0; c<COLS;c++) {
-      if (Board[r][c].shipSymbol != ' ') {
-        // printf("%c", Board[r][c].shipSymbol);
-        fputc(Board[r][c].shipSymbol, fd);
-        fputc(' ', fd);
-      }
-      else {
-        fputc('0', fd);
-        fputc(' ', fd);
+  // while (i > 0) {
+    o = rand()%2;
+    printf("%d\n",i);
+    printf("%d\n",o);
+
+    if (o == 1) {
+      printf("horizontal\n");
+      while (placing) { //orientation is horizontal
+        y1 = rand()%10;
+        y2 = y1;
+        x1 = rand()%(10-ships[i].length);
+        printf("x1: %d\n", x1);
+        x2 += ships[i].length;
+        printf("x2: %d\n", y1);
+        if (x2 < COLS) {
+          for (int j = x1; j <= x2; j++){
+            Board[y1][j].shipSymbol = ships[i].shipName;
+            printf("placed\n");
+            i--;
+          }
+          placing = 0;
+        }
       }
     }
-    fputc('\n', fd);
-  }
-  fclose(fd);
-  //release memory
-  semaphore.sem_op = 1;
-  //release semaphore
-  semop(shmd, &semaphore, 1);
-  return 0;
+
+    if (o == 0) {
+      printf("vertical\n");
+      // while (placing) { //orientation is vertical
+      //   x1 = rand()%10;
+      //   x2 = y1;
+      //   y1 = rand()%10;
+      //   y2 += ships[i].length;
+      //   if (y2 < ROWS) {
+      //     for (int j = y1; j <= y2; j++){
+      //       Board[j][x1].shipSymbol = ships[i].shipName;
+      //       printf("placed\n");
+      //       i--;
+      //     }
+      //     placing = 0;
+      //   }
+      // }
+    }
+  // }
+
+  // printBoard(Board);
 }
-
-int viewGame() {
-  printf("viewing\n");
-  FILE *fd = fopen("file.txt", "r");
-  char lines;
-  if (fd == NULL) {
-    printf("error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-  lines = fgetc(fd);
-  printf("the board:\n");
-  if (lines == EOF) {
-    printf("End of file\n");
-  }
-  while (lines != EOF) {
-    printf("printing: %c", lines);
-    lines = fgetc(fd);
-  }
-  fclose(fd);
-  printf("finishing printing game.\n");
-  return 0;
-}
-
-int removeFile() {
-  printf("checking if semaphore is available\n");
-  shmid = semget(KEY_2, 1, 0); //checks if semaphore is open
-  if (shmid < 0) {
-    printf("error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-
-  semop(shmid, &semaphore,1);
-
-  //printing contents
-  viewGame();
-
-  shmd = shmget(KEY_1, 1, 0);
-  if (shmd < 0) {
-    printf("Trying to viewing the file you got shared memory error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-
-  //removing memory
-  if (shmctl(shmd, IPC_RMID, 0) == -1) {
-    printf("in removing u have shared memory error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-  printf("\nshared memory removed\n");
-
-  //removing semaphore
-  if (semctl(shmid, IPC_RMID, 0) == -1) {
-    printf("SEMAPHORE error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-  printf("semaphore removed\n");
-
-  //removing file
-  if (remove("file.txt")) {
-    printf("FILE error %d: %s\n", errno, strerror(errno));
-    return errno;
-  }
-  printf("file removed\n");
-
-  return 0;
-}
-
-
-// void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]) {
-//   srand(time(0));
-//   int x1, y1, x2, y2;
-//   int o;
-//   int placing = 1;
-//   int i = NUM_SHIPS;
-//
-//   while (i == NUM_SHIPS) {
-//     o = rand()%2;
-//     printf("%d\n",i);
-//
-//     if (o == 1) {
-//       printf("horizontal\n");
-//       while (placing) { //orientation is horizontal
-//         y1 = rand()%10;
-//         y2 = y1;
-//         x1 = rand()%(10-ships[i].length);
-//         printf("x1: %d\n", x1);
-//         x2 += ships[i].length;
-//         printf("x2: %d\n", y1);
-//         if (x2 < COLS) {
-//           for (int j = x1; j <= x2; j++){
-//             Board[y1][j].shipSymbol = ships[i].shipName;
-//             printf("placed\n");
-//             i--;
-//           }
-//           placing = 0;
-//         }
-//       }
-//     }
-//
-//     if (o == 2) {
-//       printf("vertical\n");
-//       while (placing) { //orientation is vertical
-//         x1 = rand()%10;
-//         x2 = y1;
-//         y1 = rand()%10;
-//         y2 += ships[i].length;
-//         if (y2 < ROWS) {
-//           for (int j = y1; j <= y2; j++){
-//             Board[j][x1].shipSymbol = ships[i].shipName;
-//             printf("placed\n");
-//             i--;
-//           }
-//           placing = 0;
-//         }
-//       }
-//     }
-//   }
-//
-//   printBoard(Board);
-// }
 
 // int main() {
 //   int inGame = 1;
