@@ -121,10 +121,12 @@ void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {
 
 void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   printBoard(Board);
+
   int x1, x2, y1, y2, orientation, valid;
   for (int i = 0; i < NUM_SHIPS; i++){
     int placed = 0;
     while (!placed){
+
       printf("This ship is %d cells long.\n", ships[i].length);
       printf("Would you like the ship to be (1) horizontal or (2) vertical?\nType in 1 or 2: ");
       scanf("%d", &orientation);
@@ -134,12 +136,23 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
         printf("Please choose a valid option: ");
         scanf("%d", &orientation);
       }
-      //
+
+      //taking in an x-coordinate
       printf("Enter the x-coordinate of initial position: ");
       scanf("%d", &x1);
+      while (!isValidCoord(x1)) {
+        printf("Please choose a valid x-coordinate: ");
+        scanf("%d", &x1);
+      }
+      //y-coordinate
       printf("Enter the y-coordinate of initial position: ");
       scanf("%d", &y1);
+      while (!isValidCoord(y1)) {
+        printf("Please choose a valid y-coordinate: ");
+        scanf("%d", &y1);
+      }
 
+      //placing the ships
       if (orientation == 2) {
         x2 = x1;
         // printf("y2: %d\n", y2);
@@ -225,6 +238,17 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
       }
     }
   }
+}
+
+int isValidCoord(int coordinate) {
+  int nums[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  int n = 0;
+  for (n = 0; n < 10; n++) {
+    if (coordinate == nums[n]) {
+      return 1;
+    }
+  }
+  return 0;
 }
 
 void hit(Cell Board[ROWS][COLS], Ship ships[]) {

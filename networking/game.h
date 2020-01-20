@@ -4,6 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include <time.h>
+#include <ctype.h>
 
 #include <sys/shm.h>
 #include <sys/types.h>
@@ -93,3 +94,4 @@ void hit(Cell Board[ROWS][COLS], Ship ships[]);
 int PlayerWins(Ship ships[]);
 void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]);
 void printBoards(Cell Board[ROWS][COLS], Cell opp[ROWS][COLS]);
+int isValidCoord(int coordinate);
