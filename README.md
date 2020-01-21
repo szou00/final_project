@@ -17,8 +17,8 @@ Since battleship is a two-player game, the game will begin once both players con
 - Networking: The two players rely on networking to communicated board and ship statuses.
 
 ## Instructions
-`$ git clone git@github.com:szou00/final_project.git`
-`$ cd final_project`
-`make`
+`$ git clone git@github.com:szou00/final_project.git
+ $ cd final_project
+ $ make`
 In one terminal, type in `./server` to launch Player One
-In a second terminal within the same folder, type in `./client` to launch Player Two 
+In a second terminal within the same folder, type in `./client` to launch Player Two
