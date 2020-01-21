@@ -121,10 +121,11 @@ void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {
 
 
 void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
+  // int c;
+  // char buf[20];
   printBoard(Board);
-
-  int x1, x2, y1, y2, orientation, valid;
   for (int i = 0; i < NUM_SHIPS; i++){
+<<<<<<< HEAD
     int placed = 0;
     while (!placed){
       char buf[256];
@@ -182,62 +183,96 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
         fflush(stdin);
         // scanf("%d", &y1);
       }
+=======
+    // printf("Would you like to (1) manually place a ship or (2) randomly place one? ");
+    // scanf("%d", &c);
+    // if (c == 1) {
+      manuallyPlace(Board, ships, i);
+    // }
+    // else {
+    //   randomlyPlace(Board, ships, i);
+    // }
+  }
+}
 
-      //placing the ships
-      if (orientation == 2) {
-        x2 = x1;
-        // printf("y2: %d\n", y2);
-        if (y1+ships[i].length > ROWS) {
-          y2 = y1 - ships[i].length;
+void manuallyPlace(Cell Board[ROWS][COLS], Ship ships[], int current){
+
+  int x1, x2, y1, y2, orientation, valid, placed = 0;
+  while (placed == 0) {
+
+    printf("This ship is %d cells long.\n", ships[current].length);
+    printf("Would you like the ship to be (1) horizontal or (2) vertical?\nType in 1 or 2: ");
+    scanf("%d", &orientation);
+
+    while (orientation != 1 && orientation != 2) {
+      printf("Please choose a valid option: ");
+      scanf("%d", &orientation);
+    }
+
+    //taking in an x-coordinate
+    printf("Enter the x-coordinate of initial position: ");
+    scanf("%d", &x1);
+    while (!isValidCoord(x1)) {
+      printf("Please choose a valid x-coordinate: ");
+      scanf("%d", &x1);
+    }
+    //y-coordinate
+    printf("Enter the y-coordinate of initial position: ");
+    scanf("%d", &y1);
+    while (!isValidCoord(y1)) {
+      printf("Please choose a valid y-coordinate: ");
+      scanf("%d", &y1);
+    }
+>>>>>>> e277435afca1e564b2e5dda05e42070a749ca054
+
+    //placing the ships
+    if (orientation == 2) {
+      x2 = x1;
+      if (y1+ships[current].length > ROWS) {
+        y2 = y1 - ships[current].length;
+      }
+      else {
+        y2 = y1+ships[current].length;
+      }
+      valid = 1;
+      int less, more;
+        if (y1 < y2){
+          less = y1;
+          more = y2;
+        }
+        else{
+          less = y2+1;
+          more = y1+1;
+        }
+        for (int j = less; j <= more; j++){
+          if (Board[j][x1].shipSymbol != ' '){
+            valid = 0;
+          }
+        }
+        if (valid){
+          for (int j = less; j < more; j++){
+            Board[j][x1].shipSymbol = ships[current].shipName;
+          }
+          placed = 1;
+          system("clear");
+          printBoard(Board);
         }
         else {
-          // printf("y2: %d\n", y2);
-          y2 = y1+ships[i].length;
+          printf("There is already a ship in that position, please choose another.\n");
+          sleep(2);
+          system("clear");
+          printBoard(Board);
         }
-        // printf("ship length: %d\n", ships[i].length);
-        // printf("y2: %d\n", y2);
-
-        valid = 1;
-        int less, more;
-          if (y1 < y2){
-            less = y1;
-            more = y2;
-          }
-          else{
-            less = y2+1;
-            more = y1+1;
-          }
-          for (int j = less; j <= more; j++){
-            if (Board[j][x1].shipSymbol != ' '){
-              valid = 0;
-            }
-          }
-          if (valid){
-            for (int j = less; j < more; j++){
-              Board[j][x1].shipSymbol = ships[i].shipName;
-            }
-            placed = 1;
-            system("clear");
-            printBoard(Board);
-          }
-          else {
-            printf("There is already a ship in that position, please choose another.\n");
-          }
-        }
-      else if (orientation == 1){
+      }
+    else if (orientation == 1){
         y2 = y1;
         x2 = 0;
-        // printf("x2: %d\n", x2);
-        if (x1+ships[i].length > COLS) {
-          x2 = x1 - ships[i].length;
+        if (x1+ships[current].length > COLS) {
+          x2 = x1 - ships[current].length;
         }
         else {
-          // printf("x2: %d\n", x2);
-          x2 = x1+ships[i].length;
+          x2 = x1+ships[current].length;
         }
-        // printf("ship length: %d\n", ships[i].length);
-        // printf("x2: %d\n", x2);
-
         int less, more;
         valid = 1;
         if (x1 < x2){
@@ -248,16 +283,14 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
           less = x2+1;
           more = x1+1;
         }
-        // printf("less: %d, more: %d\n", less, more);
         for (int j = less; j <= more; j++){
           if (Board[y1][j].shipSymbol != ' '){
             valid = 0;
           }
         }
-        // printf("valid: %d\n", valid);
         if (valid){
           for (int j = less; j < more; j++){
-            Board[y1][j].shipSymbol = ships[i].shipName;
+            Board[y1][j].shipSymbol = ships[current].shipName;
           }
           placed = 1;
           system("clear");
@@ -265,11 +298,14 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
         }
         else {
           printf("There is already a ship in that position, please choose another.\n");
+          sleep(2);
+          system("clear");
+          printBoard(Board);
         }
       }
+
     }
   }
-}
 
 int isValidCoord(int coordinate) {
   int nums[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -286,6 +322,7 @@ int hit(Cell Board[ROWS][COLS], Ship ships[]) {
   int r, c, s, success = 0;
   char buf[256];
   printf("Your turn! Which position would you like to hit?\n");
+
   printf("Enter the x-coordinate: ");
   fgets(buf, sizeof(buf), stdin);
   c = atoi(buf);
@@ -310,10 +347,27 @@ int hit(Cell Board[ROWS][COLS], Ship ships[]) {
     fflush(stdout);
     fflush(stdin);
     // scanf("%d", &x1);
-  }
 
   int i = 0;
-  if (Board[r][c].shipSymbol != ' ') { //checking there is a ship
+  if (Board[r][c].shipSymbol == WATER || Board[r][c].shipSymbol == HIT) {
+
+    printf("You already targeted this position once. Choose another.\n");
+    printf("Enter the x-coordinate: ");
+    scanf("%d", &c);
+    while (!isValidCoord(c)) {
+      printf("Please choose a valid x-coordinate: ");
+      scanf("%d", &c);
+    }
+    //y-coordinate
+    printf("Enter the y-coordinate: ");
+    scanf("%d", &r);
+    while (!isValidCoord(r)) {
+      printf("Please choose a valid y-coordinate: ");
+      scanf("%d", &r);
+    }
+
+  }
+  else if (Board[r][c].shipSymbol != ' ') { //checking there is a ship
     for (s = 0; s<5; s++) {
       if (Board[r][c].shipSymbol == ships[s].shipName) {
         ships[s].hits += 1; //adding hits to the corresponding ship
@@ -346,56 +400,77 @@ int PlayerWins(Ship ships[]) {
 }
 
 
-void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]) {
-  srand(time(0));
-  int x1, y1, x2, y2;
+void randomlyPlace(Cell Board[ROWS][COLS], Ship ships[], int current) {
+  int x1, y1, x2, y2, j, valid, more, less = 0;
   int o;
-  int placing = 1;
-  int i = NUM_SHIPS;
+  int placed = 0;
+  srand(time(0));
 
-  while (i == NUM_SHIPS) {
+  while (placed != 1) {
     o = rand()%2;
-    printf("%d\n",i);
-
     if (o == 1) {
-      printf("horizontal\n");
-      while (placing) { //orientation is horizontal
         y1 = rand()%10;
-        y2 = y1;
-        x1 = rand()%(10-ships[i].length);
-        printf("x1: %d\n", x1);
-        x2 += ships[i].length;
-        printf("x2: %d\n", y1);
-        if (x2 < COLS) {
-          for (int j = x1; j <= x2; j++){
-            Board[y1][j].shipSymbol = ships[i].shipName;
-            printf("placed\n");
-            i--;
-          }
-          placing = 0;
+        x1 = rand()%10;
+        if (x1+ships[current].length >= COLS) {
+          x2 = x1-ships[current].length;
         }
-      }
+        else {
+          x2 = x1+ships[current].length;
+        }
+        if (x1<x2) {
+          more = x2;
+          less = x1;
+        }
+        else {
+          more = x1+1;
+          less = x2+1;
+        }
+        for (j = less; j <= more; j++){
+          if (Board[y1][j].shipSymbol != ' '){
+            valid = 0;
+          }
+        }
+        if (valid) {
+          for (j = less; j < more; j++){
+            Board[y1][j].shipSymbol = ships[current].shipName;
+          }
+          placed = 1;
+          // printf("placed one!\n");
+        }
     }
 
-    if (o == 2) {
-      printf("vertical\n");
-      while (placing) { //orientation is vertical
-        x1 = rand()%10;
-        x2 = y1;
-        y1 = rand()%10;
-        y2 += ships[i].length;
-        if (y2 < ROWS) {
-          for (int j = y1; j <= y2; j++){
-            Board[j][x1].shipSymbol = ships[i].shipName;
-            printf("placed\n");
-            i--;
-          }
-          placing = 0;
+    if (o == 0) {
+      x1 = rand()%10;
+      y1 = rand()%10;
+      if (y1+ships[current].length >= ROWS) {
+        y2 = y1-ships[current].length;
+      }
+      else {
+        y2 = y1+ships[current].length;
+      }
+      if (y1<y2) {
+        more = y2;
+        less = y1;
+      }
+      else {
+        more = y1+1;
+        less = y2+1;
+      }
+      for (j = less; j < more; j++){
+        if (Board[j][x1].shipSymbol != ' '){
+          valid = 0;
         }
+      }
+      if (valid) {
+        for (j = less; j < more; j++){
+          Board[j][x1].shipSymbol = ships[current].shipName;
+        }
+        // printf("placed one!\n");
+        placed = 1;
       }
     }
   }
-
+  system("clear");
   printBoard(Board);
 }
 
