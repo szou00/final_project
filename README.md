@@ -19,11 +19,13 @@ Since battleship is a two-player game, the game will begin once both players con
 
 ## Bugs
 These are some errors that are we were not able to fix:
+- make: We're not entirely sure why it won't compile on linux/the school computers. It says that one of our files, networking.o, has an unrecognizable format.
 - PlaceShips: At certain locations (mostly when it's close to the outer edge of the board), the game will print that there is another ship in the same position depite there not being any other ship.
 - Targeting ships: If no integer is inputted (ex: you just press enter at the prompt), it will take in a 0.
 - Undesired input: If it's not the player's turn but they accidentally input something, this will be taken into the next input. (ex: they enter 5; when it's their turn, the game will immediately take in 5 as their x-coord input).
 
 ## Instructions
+- Ideally, the game should work by following these instructions: 
 ```
  $ git clone git@github.com:szou00/final_project.git
  $ cd final_project/networking
