@@ -1,21 +1,19 @@
 #include "game.h"
 
 void printWelcome() {
-  printf("WELCOME TO\n");
-  printf ("XXXXX   XXXX  XXXXXX XXXXXX XX     XXXXXX  XXXXX XX  XX XX XXXX\n");
-  printf ("XX  XX XX  XX   XX     XX   XX     XX     XX     XX  XX XX XX  XX\n");
-	printf ("XXXXX  XX  XX   XX     XX   XX     XXXX    XXXX  XXXXXX XX XXXX\n");
-	printf ("XX  XX XXXXXX   XX     XX   XX     XX         XX XX  XX XX XX\n");
-	printf ("XXXXX  XX  XX   XX     XX   XXXXXX XXXXXX XXXXX  XX  XX XX XX\n");
-  // printf("   ___     ___    _____   _____    _       ___     ___    _  _     ___      ___  ");
-  // printf("  | _ )   /   \  |_   _| |_   _|  | |     | __|   / __|  | || |   |_ _|    | _ \ ");
-  // printf("  | _ \   | - |    | |     | |    | |__   | _|    \__ \  | __ |    | |     |  _/ ");
-  // printf("  |___/   |_|_|   _|_|_   _|_|_   |____|  |___|   |___/  |_||_|   |___|   _|_|_  ");
-  // printf("_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_| """ | ");
-  // printf(""`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-' ");
-  sleep(1);
   system("clear");
-	printf ("\n\n");
+  printf("\n\n\n\n\n\n");
+  printf("            ___  ___  ___  ___  _    ___  ___  _ _  _  ___ \n ");
+  sleep(1);
+  printf("           | . >| . ||_ _||_ _|| |  | __>/ __>| | || || . \\ \n");
+  sleep(1);
+  printf("            | . \\|   | | |  | | | |_ | _> \\__ \\|   || ||  _/\n");
+  sleep(1);
+  printf("            |___/|_|_| |_|  |_| |___||___><___/|_|_||_||_| \n");
+
+  sleep(3);
+  system("clear");
+  printf ("\n\n");
 	printf ("RULES OF THE GAME:\n");
 	printf ("1. This is a two player game.\n");
 	printf ("2. There are five types of ships to be placed by longest length to the\n");
@@ -26,7 +24,7 @@ void printWelcome() {
   sleep(5);
   printf("                  R E A D Y!\n");
   sleep(1);
-  system("clear");
+  // system("clear");
 }
 
 void initializeBoard(Cell Board[ROWS][COLS]) {
