@@ -10,15 +10,10 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
+#include <sys/ioctl.h>
 
 #define KEY_1 24601
 #define KEY_2 24602
-
-int shmid;
-int shmd;
-int fd;
-union semun sm;
-struct sembuf semaphore;
 
 #define ROWS 10
 #define COLS 10
@@ -87,7 +82,8 @@ void initializeBoard (Cell Board[ROWS][COLS]);
 void printBoard (Cell Board[ROWS][COLS]);
 void placeShips (Cell Board[ROWS][COLS], Ship ships[]);
 void place (Cell Board[ROWS][COLS], Ship ship);
-void randomizePositions(Cell Board[ROWS][COLS], Ship ships[]);
+void manuallyPlace(Cell Board[ROWS][COLS], Ship ships[], int current);
+void randomlyPlace(Cell Board[ROWS][COLS], Ship ships[], int current);
 void hit(Cell Board[ROWS][COLS], Ship ships[]);
 int PlayerWins(Ship ships[]);
 int createFile();
