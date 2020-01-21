@@ -76,8 +76,13 @@ int main(int argc, char **argv) {
     printShips(ship2, ship1);
     read(server_socket, playerTwo, sizeof(playerTwo));
     read(server_socket, ship2, sizeof(ship2));
+    printGame(playerTwo, playerOne);
+    printShips(ship2, ship1);
     hit(playerOne, ship1);
     sleep(1);
+    system("clear");
+    printGame(playerTwo, playerOne);
+    printShips(ship2, ship1);
     write(server_socket, playerOne, sizeof(playerOne));
     write(server_socket, ship1, sizeof(ship1));
   }

@@ -119,6 +119,7 @@ void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {
   }
 }
 
+
 void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   printBoard(Board);
 
@@ -126,30 +127,60 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   for (int i = 0; i < NUM_SHIPS; i++){
     int placed = 0;
     while (!placed){
+      char buf[256];
 
       printf("This ship is %d cells long.\n", ships[i].length);
       printf("Would you like the ship to be (1) horizontal or (2) vertical?\nType in 1 or 2: ");
-      scanf("%d", &orientation);
+      // fflush(stdout);
+      // fflush(stdin);
+      fgets(buf, sizeof(buf), stdin);
+      orientation = atoi(buf);
+      fflush(stdout);
+      fflush(stdin);
+      // scanf("%d", &orientation);
 
       //in case they put in wrong num
-      while (orientation != 1 && orientation != 2) {
+      while ((orientation != 1 && orientation != 2)) {
         printf("Please choose a valid option: ");
-        scanf("%d", &orientation);
+        // fflush(stdout);
+        // fflush(stdin);
+        fgets(buf, sizeof(buf), stdin);
+        orientation = atoi(buf);
+        fflush(stdout);
+        fflush(stdin);
+        // scanf("%d", &orientation);
+        // cleanBuffer();
       }
 
       //taking in an x-coordinate
       printf("Enter the x-coordinate of initial position: ");
-      scanf("%d", &x1);
+      fgets(buf, sizeof(buf), stdin);
+      x1 = atoi(buf);
+      fflush(stdout);
+      fflush(stdin);
+      // scanf("%d", &x1);
       while (!isValidCoord(x1)) {
         printf("Please choose a valid x-coordinate: ");
-        scanf("%d", &x1);
+        fgets(buf, sizeof(buf), stdin);
+        x1 = atoi(buf);
+        fflush(stdout);
+        fflush(stdin);
+        // scanf("%d", &x1);
       }
       //y-coordinate
       printf("Enter the y-coordinate of initial position: ");
-      scanf("%d", &y1);
+      fgets(buf, sizeof(buf), stdin);
+      y1 = atoi(buf);
+      fflush(stdout);
+      fflush(stdin);
+      // scanf("%d", &y1);
       while (!isValidCoord(y1)) {
         printf("Please choose a valid y-coordinate: ");
-        scanf("%d", &y1);
+        fgets(buf, sizeof(buf), stdin);
+        y1 = atoi(buf);
+        fflush(stdout);
+        fflush(stdin);
+        // scanf("%d", &y1);
       }
 
       //placing the ships
@@ -253,11 +284,33 @@ int isValidCoord(int coordinate) {
 
 int hit(Cell Board[ROWS][COLS], Ship ships[]) {
   int r, c, s, success = 0;
+  char buf[256];
   printf("Your turn! Which position would you like to hit?\n");
   printf("Enter the x-coordinate: ");
-  scanf("%d", &c);
+  fgets(buf, sizeof(buf), stdin);
+  c = atoi(buf);
+  fflush(stdout);
+  fflush(stdin);
+  while (!isValidCoord(c)) {
+    printf("Please choose a valid x-coordinate: ");
+    fgets(buf, sizeof(buf), stdin);
+    c = atoi(buf);
+    fflush(stdout);
+    fflush(stdin);
+  }
   printf("Enter the y-coordinate: ");
-  scanf("%d", &r);
+  fgets(buf, sizeof(buf), stdin);
+  r = atoi(buf);
+  fflush(stdout);
+  fflush(stdin);
+  while (!isValidCoord(r)) {
+    printf("Please choose a valid x-coordinate: ");
+    fgets(buf, sizeof(buf), stdin);
+    r = atoi(buf);
+    fflush(stdout);
+    fflush(stdin);
+    // scanf("%d", &x1);
+  }
 
   int i = 0;
   if (Board[r][c].shipSymbol != ' ') { //checking there is a ship

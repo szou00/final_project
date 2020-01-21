@@ -81,6 +81,9 @@ int main() {
     printShips(ship1, ship2);
     hit(playerTwo, ship2);
     sleep(1);
+    system("clear");
+    printGame(playerOne, playerTwo);
+    printShips(ship1, ship2);
     write(client_socket, playerTwo, sizeof(playerTwo));
     write(client_socket, ship2, sizeof(ship2));
     read(client_socket, playerOne, sizeof(playerOne));
