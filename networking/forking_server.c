@@ -94,10 +94,12 @@ int main() {
     read(client_socket, ship1, sizeof(ship1));
   }
   if (PlayerWins(ship1)) {
+    printGoodbye();
     printf("%s won :( Better luck next time!\n", playerTwoName);
   }
   else {
-    printf("Awesome, you won!\n");
+    printGoodbye();
+    printf("AWESOME, you won!\n");
   }
   close(client_socket);
   exit(0);

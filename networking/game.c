@@ -147,8 +147,8 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
       //
       char buf[256];
 
-      printf("This ship is %d cells long.\n\n", ships[i].length);
-      printf("Would you like the ship to be (1) horizontal or (2) vertical?\n\nType in 1 or 2: ");
+      printf("This ship is %d cells long.\n", ships[i].length);
+      printf("Would you like the ship to be (1) horizontal or (2) vertical?\nType in 1 or 2: ");
       // fflush(stdout);
       // fflush(stdin);
       fgets(buf, sizeof(buf), stdin);
@@ -397,4 +397,21 @@ int PlayerWins(Ship ships[]) {
     return 1;
   }
   return 0;
+}
+
+void printGoodbye() {
+  // system("clear");
+  // printf("\n\n\n\n\n\n");
+  printf("\n");
+  sleep(1);
+  printf("       ___   ___  __ __  ___   ___  _ _  ___  ___ \n ");
+  sleep(1);
+  printf("     /  _> | . ||  \\  \\| __> | . || | || __>| . \\ \n");
+  sleep(1);
+  printf("      | <_/\\|   ||     || _>  | | || ' || _> |   /\n");
+  sleep(1);
+  printf("      `____/|_|_||_|_|_||___> `___'|__/ |___>|_\\_\\ \n");
+
+  sleep(3);
+  printf ("\n\n");
 }

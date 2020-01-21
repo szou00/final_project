@@ -84,3 +84,4 @@ int PlayerWins(Ship ships[]);
 void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]);
 void printBoards(Cell Board[ROWS][COLS], Cell opp[ROWS][COLS]);
 int isValidCoord(int coordinate);
+void printGoodbye();

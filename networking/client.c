@@ -93,9 +93,11 @@ int main(int argc, char **argv) {
     write(server_socket, ship1, sizeof(ship1));
   }
   if (PlayerWins(ship1)) {
-    printf("Awesome, you won! \n");
+    printGoodbye();
+    printf("AWESOME, you won! \n");
   }
   else {
+    printGoodbye();
     printf("%s won :( Better luck next time!\n", playerOneName);
   }
   close(server_socket);
