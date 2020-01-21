@@ -94,11 +94,11 @@ int main(int argc, char **argv) {
   }
   if (PlayerWins(ship1)) {
     printGoodbye();
-    printf("AWESOME, you won! \n");
+    printf("AWESOME, you won! \n\n\n");
   }
   else {
     printGoodbye();
-    printf("%s won :( Better luck next time!\n", playerOneName);
+    printf("%s won :( Better luck next time!\n\n\n", playerOneName);
   }
   close(server_socket);
   exit(0);

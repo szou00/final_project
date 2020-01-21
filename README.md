@@ -14,8 +14,14 @@ Since battleship is a two-player game, the game will begin once both players con
 - Allocating memory: At the beginning of the game, memory is allocated to remember the names of the players and the position of their ships.
 - Signals: When a player makes an error in entering their names or in the placement of their ships, messages are returned accordingly.
 - Shared memory: Attempted to use this to share information between the two players, but it was simpler to send all the information through networking
-- Networking: The two players rely on networking to communicated board and ship statuses.
-- Files: Attempted to use files and write to them to store information about the status of boards and ships. 
+- Networking: The two players rely on networking to communicate about board and ship statuses.
+- Files: Attempted to use files and write to them to store information about the status of boards and ships.
+
+## Bugs
+These are some errors that are we were not able to fix:
+- PlaceShips: At certain locations (mostly when it's close to the outer edge of the board), the game will print that there is another ship in the same position depite there not being any other ship.
+- Targeting ships: If no integer is inputted (ex: you just press enter at the prompt), it will take in a 0.
+- Undesired input: If it's not the player's turn but they accidentally input something, this will be taken into the next input. (ex: they enter 5; when it's their turn, the game will immediately take in 5 as their x-coord input).
 
 ## Instructions
 ```

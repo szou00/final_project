@@ -95,11 +95,11 @@ int main() {
   }
   if (PlayerWins(ship1)) {
     printGoodbye();
-    printf("%s won :( Better luck next time!\n", playerTwoName);
+    printf("%s won :( Better luck next time!\n\n\n", playerTwoName);
   }
   else {
     printGoodbye();
-    printf("AWESOME, you won!\n");
+    printf("AWESOME, you won!\n\n\n");
   }
   close(client_socket);
   exit(0);
