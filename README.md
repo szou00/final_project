@@ -13,14 +13,15 @@ Since battleship is a two-player game, the game will begin once both players con
 ## Description of Technical Design
 - Allocating memory: At the beginning of the game, memory is allocated to remember the names of the players and the position of their ships.
 - Signals: When a player makes an error in entering their names or in the placement of their ships, messages are returned accordingly.
-- Shared Memory:
+- Shared memory: Attempted to use this to share information between the two players, but it was simpler to send all the information through networking
 - Networking: The two players rely on networking to communicated board and ship statuses.
+- Files: Attempted to use files and write to them to store information about the status of boards and ships. 
 
 ## Instructions
 ```
  $ git clone git@github.com:szou00/final_project.git
- $ cd final_project
+ $ cd final_project/networking
  $ make
 ```
-In one terminal, type in `./server` to launch Player One
-In a second terminal within the same folder, type in `./client` to launch Player Two
+- In one terminal, type in `./server` to launch Player One.
+- In a second terminal within the same folder, type in `./client` to launch Player Two

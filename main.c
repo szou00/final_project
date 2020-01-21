@@ -20,15 +20,14 @@ int main(){
                           {'d', 2}};
 
   //
-  // printWelcome();
+  printWelcome();
   // createFile();
   initializeBoard(playerOne);
   // viewGame();
   initializeBoard(playerTwo);
 
-  printf("Hey Player One! Place your ships:\n");
+  // printf("Hey Player One! Place your ships:\n");
   // placeShips(playerOne, ship1);
-  randomizePositions(playerOne, ship1);
   // writeToFile(playerOne);
   // system("clear");
   // printf("Hey Player Two! Place your ships\n");

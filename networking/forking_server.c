@@ -16,18 +16,22 @@ int main() {
   printf("Waiting for Player Two to connect...\n");
   int client_socket = server_connect(listen_socket);
   printf("Player Two has connected! Now starting the game. \n");
-  sleep(3);
+  sleep(2);
   system("clear");
+  printWelcome();
 
-  //create players
-  Players players;
   /**initialize name for player one**/
+  char *playerOneName;
+  char *playerTwoName;
   char buf[20];
   printf("Enter your name: ");
   fgets(buf, 20, stdin);
   buf[strcspn(buf, "\n")] = 0;
-  memcpy(&players.playerOneName, buf, sizeof(buf));
-  printf("Hey %s! Let's get started.\n", players.playerOneName);
+  playerOneName = (char*)malloc(sizeof(buf));
+  playerTwoName = (char*)malloc(sizeof(char));
+  playerOneName = buf;
+  system("clear");
+  printf("Hey %s! Let's get started. Choose where you would like your ships to be: \n\n", playerOneName);
   /**/
 
   // Create the game boards for both players
@@ -60,16 +64,16 @@ int main() {
   read(client_socket, ship2, sizeof(ship2));
   write(client_socket, ship1, sizeof(ship1));
 
-  read(client_socket, players.playerTwoName, sizeof(players.playerTwoName));
-  write(client_socket, players.playerOneName, sizeof(players.playerOneName));
+  read(client_socket, playerTwoName, sizeof(playerTwoName));
+  write(client_socket, playerOneName, sizeof(playerOneName));
   // printf("You are: %s\n", playerOneName.getName);
   // printf("Your opponent is: %s\n", playerTwoName.getName);
 
   // printf("TESTING: %c\n\n", playerTwo[2][3].shipSymbol);
   // sendBoard(playerTwo, buffer, client_socket);
   printGame(playerOne, playerTwo);
-  printf("Your opponent is %s!\n", players.playerTwoName);
-  printf("Waiting for %s...\n", players.playerTwoName);
+  printf("Your opponent is %s!\n", playerTwoName);
+  printf("Waiting for %s...\n", playerTwoName);
 
   printf("Both players are ready! Game is starting...\n\n");
   sleep(3);
@@ -90,10 +94,10 @@ int main() {
     read(client_socket, ship1, sizeof(ship1));
   }
   if (PlayerWins(ship1)) {
-    printf("Awesome, you won!\n");
+    printf("%s won :( Better luck next time!\n", playerTwoName);
   }
   else {
-    printf("%s won :( Better luck next time!\n", players.playerTwoName);
+    printf("Awesome, you won!\n");
   }
   close(client_socket);
   exit(0);

@@ -3,6 +3,8 @@
 void printWelcome() {
   system("clear");
   printf("\n\n\n\n\n\n");
+  printf("\n");
+  sleep(1);
   printf("            ___  ___  ___  ___  _    ___  ___  _ _  _  ___ \n ");
   sleep(1);
   printf("           | . >| . ||_ _||_ _|| |  | __>/ __>| | || || . \\ \n");
@@ -13,16 +15,23 @@ void printWelcome() {
 
   sleep(3);
   system("clear");
-  printf ("\n\n");
-	printf ("RULES OF THE GAME:\n");
-	printf ("1. This is a two player game.\n");
+  printf ("\n");
+  printf ("Weclome to Battleship!\n\n");
+	printf ("Here are the rules of the game:\n\n");
+	printf ("1. This is a two player game.\n\n");
 	printf ("2. There are five types of ships to be placed by longest length to the\n");
 	printf ("   shortest; [c] Carrier has 5 cells, [b] Battleship has 4 cells, [r] Cruiser\n");
-	printf ("   has 3 cells, [s] Submarine has 3 cells, [d] Destroyer has 2 cells\n");
-	printf ("3. First player to guess the location of all ships wins\n\n");
-  printf("                  L O A D I N G ...\n");
+	printf ("   has 3 cells, [s] Submarine has 3 cells, [d] Destroyer has 2 cells.\n\n");
+  printf ("3. Place your ships and target other ships by following the prompts displayed \n");
+  printf ("   on the screen.\n\n");
+  printf ("4. Each turn, you will see your board (with the ships displayed) and the\n");
+  printf ("   opponents' board (with ships not displayed) on your screen. You will also\n");
+  printf ("   see the status of your ships. The number corresponding to each ship\n");
+  printf ("   indicates the number of cells it has been hit.\n\n");
+	printf ("5. First player to guess the location of all opponents' ships wins.\n\n");
+  printf("  R E A D Y ? ");
   sleep(5);
-  printf("                  R E A D Y!\n");
+  printf("L E T ' S  P L A Y\n\n");
   sleep(1);
   // system("clear");
 }
@@ -128,10 +137,18 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
   for (int i = 0; i < NUM_SHIPS; i++){
     int placed = 0;
     while (!placed){
+      //to fix a certain bug:
+      orientation = 20;
+      valid = 20;
+      x1 = 20;
+      x2 = 20;
+      y1 = 20;
+      y2 = 20;
+      //
       char buf[256];
 
-      printf("This ship is %d cells long.\n", ships[i].length);
-      printf("Would you like the ship to be (1) horizontal or (2) vertical?\nType in 1 or 2: ");
+      printf("This ship is %d cells long.\n\n", ships[i].length);
+      printf("Would you like the ship to be (1) horizontal or (2) vertical?\n\nType in 1 or 2: ");
       // fflush(stdout);
       // fflush(stdin);
       fgets(buf, sizeof(buf), stdin);
@@ -189,7 +206,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
     if (orientation == 2) {
       x2 = x1;
       // printf("y2: %d\n", y2);
-      if (y1+ships[i].length > ROWS) {
+      if (y1+ships[i].length >= ROWS) {
         y2 = y1 - ships[i].length;
       }
       else {
@@ -230,7 +247,7 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
         y2 = y1;
         x2 = 0;
         // printf("x2: %d\n", x2);
-        if (x1+ships[i].length > COLS) {
+        if (x1+ships[i].length >= COLS) {
           x2 = x1 - ships[i].length;
         }
         else {
@@ -320,7 +337,7 @@ int hit(Cell Board[ROWS][COLS], Ship ships[]) {
     // scanf("%d", &x1);
 
   int i = 0;
-  if (Board[r][c].shipSymbol == WATER || Board[r][c].shipSymbol == HIT) {
+  while (Board[r][c].shipSymbol == WATER || Board[r][c].shipSymbol == HIT) {
 
     printf("You already targeted this position once. Choose another.\n");
     printf("Enter the x-coordinate: ");
@@ -350,7 +367,7 @@ int hit(Cell Board[ROWS][COLS], Ship ships[]) {
     }
 
   }
-  else if (Board[r][c].shipSymbol != ' ') { //checking there is a ship
+  if (Board[r][c].shipSymbol != ' ') { //checking there is a ship
     for (s = 0; s<5; s++) {
       if (Board[r][c].shipSymbol == ships[s].shipName) {
         ships[s].hits += 1; //adding hits to the corresponding ship

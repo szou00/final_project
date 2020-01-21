@@ -58,11 +58,6 @@ typedef struct cell {
 	Ship thisShip;
 } Cell;
 
-typedef struct players {
-	char playerOneName[20];
-	char playerTwoName[20];
-} Players;
-
 // typedef enum {
 // 	C_LENGTH = 5,
 // 	B_LENGTH = 4,
