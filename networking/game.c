@@ -118,9 +118,13 @@ void printShips(Ship me[NUM_SHIPS], Ship opp[NUM_SHIPS]) {
 }
 
 
-void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
-  int x1, x2, y1, y2, orientation = 0;
 
+
+void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
+  // int c;
+  // char buf[20];
+  printBoard(Board);
+  int x1, x2, y1, y2, orientation, valid;
   for (int i = 0; i < NUM_SHIPS; i++){
     int placed = 0;
     while (!placed){
@@ -179,6 +183,96 @@ void placeShips(Cell Board[ROWS][COLS], Ship ships[]){
         fflush(stdin);
         // scanf("%d", &y1);
       }
+    // printf("Would you like to (1) manually place a ship or (2) randomly place one? ");
+    // scanf("%d", &c);
+    // if (c == 1) {
+    if (orientation == 2) {
+      x2 = x1;
+      // printf("y2: %d\n", y2);
+      if (y1+ships[i].length > ROWS) {
+        y2 = y1 - ships[i].length;
+      }
+      else {
+        // printf("y2: %d\n", y2);
+        y2 = y1+ships[i].length;
+      }
+      // printf("ship length: %d\n", ships[i].length);
+      // printf("y2: %d\n", y2);
+
+      valid = 1;
+      int less, more;
+        if (y1 < y2){
+          less = y1;
+          more = y2;
+        }
+        else{
+          less = y2+1;
+          more = y1+1;
+        }
+        for (int j = less; j <= more; j++){
+          if (Board[j][x1].shipSymbol != ' '){
+            valid = 0;
+          }
+        }
+        if (valid){
+          for (int j = less; j < more; j++){
+            Board[j][x1].shipSymbol = ships[i].shipName;
+          }
+          placed = 1;
+          system("clear");
+          printBoard(Board);
+        }
+        else {
+          printf("There is already a ship in that position, please choose another.\n");
+        }
+      }
+      else if (orientation == 1){
+        y2 = y1;
+        x2 = 0;
+        // printf("x2: %d\n", x2);
+        if (x1+ships[i].length > COLS) {
+          x2 = x1 - ships[i].length;
+        }
+        else {
+          // printf("x2: %d\n", x2);
+          x2 = x1+ships[i].length;
+        }
+        // printf("ship length: %d\n", ships[i].length);
+        // printf("x2: %d\n", x2);
+
+        int less, more;
+        valid = 1;
+        if (x1 < x2){
+          less = x1;
+          more = x2;
+        }
+        else{
+          less = x2+1;
+          more = x1+1;
+        }
+      // printf("less: %d, more: %d\n", less, more);
+        for (int j = less; j <= more; j++){
+          if (Board[y1][j].shipSymbol != ' '){
+            valid = 0;
+          }
+        }
+        // printf("valid: %d\n", valid);
+        if (valid){
+          for (int j = less; j < more; j++){
+            Board[y1][j].shipSymbol = ships[i].shipName;
+          }
+          placed = 1;
+          system("clear");
+          printBoard(Board);
+        }
+        else {
+          printf("There is already a ship in that position, please choose another.\n");
+        }
+      }
+      // }
+      // else {
+      //   randomlyPlace(Board, ships, i);
+      // }
     }
   }
 }
@@ -224,23 +318,36 @@ int hit(Cell Board[ROWS][COLS], Ship ships[]) {
     fflush(stdin);
   }
     // scanf("%d", &x1);
+  }
 
   int i = 0;
   if (Board[r][c].shipSymbol == WATER || Board[r][c].shipSymbol == HIT) {
 
     printf("You already targeted this position once. Choose another.\n");
     printf("Enter the x-coordinate: ");
-    scanf("%d", &c);
+    fgets(buf, sizeof(buf), stdin);
+    c = atoi(buf);
+    fflush(stdout);
+    fflush(stdin);
     while (!isValidCoord(c)) {
       printf("Please choose a valid x-coordinate: ");
-      scanf("%d", &c);
+      fgets(buf, sizeof(buf), stdin);
+      c = atoi(buf);
+      fflush(stdout);
+      fflush(stdin);
     }
     //y-coordinate
     printf("Enter the y-coordinate: ");
-    scanf("%d", &r);
+    fgets(buf, sizeof(buf), stdin);
+    r = atoi(buf);
+    fflush(stdout);
+    fflush(stdin);
     while (!isValidCoord(r)) {
       printf("Please choose a valid y-coordinate: ");
-      scanf("%d", &r);
+      fgets(buf, sizeof(buf), stdin);
+      r = atoi(buf);
+      fflush(stdout);
+      fflush(stdin);
     }
 
   }
