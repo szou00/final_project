@@ -318,7 +318,6 @@ int hit(Cell Board[ROWS][COLS], Ship ships[]) {
     fflush(stdin);
   }
     // scanf("%d", &x1);
-  }
 
   int i = 0;
   if (Board[r][c].shipSymbol == WATER || Board[r][c].shipSymbol == HIT) {
