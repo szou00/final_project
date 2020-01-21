@@ -198,6 +198,7 @@ void manuallyPlace(Cell Board[ROWS][COLS], Ship ships[], int current){
         }
         else {
           printf("There is already a ship in that position, please choose another.\n");
+          sleep(2);
           system("clear");
           printBoard(Board);
         }
@@ -236,6 +237,7 @@ void manuallyPlace(Cell Board[ROWS][COLS], Ship ships[], int current){
         }
         else {
           printf("There is already a ship in that position, please choose another.\n");
+          sleep(2);
           system("clear");
           printBoard(Board);
         }
@@ -258,13 +260,41 @@ int isValidCoord(int coordinate) {
 int hit(Cell Board[ROWS][COLS], Ship ships[]) {
   int r, c, s, success = 0;
   printf("Your turn! Which position would you like to hit?\n");
+
   printf("Enter the x-coordinate: ");
   scanf("%d", &c);
+  while (!isValidCoord(c)) {
+    printf("Please choose a valid x-coordinate: ");
+    scanf("%d", &c);
+  }
+  //y-coordinate
   printf("Enter the y-coordinate: ");
   scanf("%d", &r);
+  while (!isValidCoord(r)) {
+    printf("Please choose a valid y-coordinate: ");
+    scanf("%d", &r);
+  }
 
   int i = 0;
-  if (Board[r][c].shipSymbol != ' ') { //checking there is a ship
+  if (Board[r][c].shipSymbol == WATER || Board[r][c].shipSymbol == HIT) {
+
+    printf("You already targeted this position once. Choose another.\n");
+    printf("Enter the x-coordinate: ");
+    scanf("%d", &c);
+    while (!isValidCoord(c)) {
+      printf("Please choose a valid x-coordinate: ");
+      scanf("%d", &c);
+    }
+    //y-coordinate
+    printf("Enter the y-coordinate: ");
+    scanf("%d", &r);
+    while (!isValidCoord(r)) {
+      printf("Please choose a valid y-coordinate: ");
+      scanf("%d", &r);
+    }
+
+  }
+  else if (Board[r][c].shipSymbol != ' ') { //checking there is a ship
     for (s = 0; s<5; s++) {
       if (Board[r][c].shipSymbol == ships[s].shipName) {
         ships[s].hits += 1; //adding hits to the corresponding ship
