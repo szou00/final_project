@@ -3,6 +3,8 @@
 void printWelcome() {
   system("clear");
   printf("\n\n\n\n\n\n");
+  printf("\n");
+  sleep(1);
   printf("            ___  ___  ___  ___  _    ___  ___  _ _  _  ___ \n ");
   sleep(1);
   printf("           | . >| . ||_ _||_ _|| |  | __>/ __>| | || || . \\ \n");
@@ -13,16 +15,23 @@ void printWelcome() {
 
   sleep(3);
   system("clear");
-  printf ("\n\n");
-	printf ("RULES OF THE GAME:\n");
-	printf ("1. This is a two player game.\n");
+  printf ("\n");
+  printf ("Weclome to Battleship!\n\n");
+	printf ("Here are the rules of the game:\n\n");
+	printf ("1. This is a two player game.\n\n");
 	printf ("2. There are five types of ships to be placed by longest length to the\n");
 	printf ("   shortest; [c] Carrier has 5 cells, [b] Battleship has 4 cells, [r] Cruiser\n");
-	printf ("   has 3 cells, [s] Submarine has 3 cells, [d] Destroyer has 2 cells\n");
-	printf ("3. First player to guess the location of all ships wins\n\n");
-  printf("                  L O A D I N G ...\n");
+	printf ("   has 3 cells, [s] Submarine has 3 cells, [d] Destroyer has 2 cells.\n\n");
+  printf ("3. Place your ships and target other ships by following the prompts displayed \n");
+  printf ("   on the screen.\n\n");
+  printf ("4. Each turn, you will see your board (with the ships displayed) and the\n");
+  printf ("   opponents' board (with ships not displayed) on your screen. You will also\n");
+  printf ("   see the status of your ships. The number corresponding to each ship\n");
+  printf ("   indicates the number of cells it has been hit.\n\n");
+	printf ("5. First player to guess the location of all opponents' ships wins.\n\n");
+  printf("  R E A D Y ? ");
   sleep(5);
-  printf("                  R E A D Y!\n");
+  printf("L E T ' S  P L A Y\n\n");
   sleep(1);
   // system("clear");
 }
@@ -350,3 +359,20 @@ void randomlyPlace(Cell Board[ROWS][COLS], Ship ships[], int current) {
 //     randomizePositions(Board);
 //   }
 // }
+
+void printGoodbye() {
+  system("clear");
+  printf("\n\n\n\n\n\n");
+  printf("\n");
+  // sleep(1);
+  printf("            ___   ___  __ __  ___   ___  _ _  ___  ___ \n ");
+  // sleep(1);
+  printf("          /  _> | . ||  \\  \\| __> | . || | || __>| . \\ \n");
+  // sleep(1);
+  printf("           | <_/\\|   ||     || _>  | | || ' || _> |   /\n");
+  // sleep(1);
+  printf("           `____/|_|_||_|_|_||___> `___'|__/ |___>|_\\_\\ \n");
+
+  sleep(3);
+  printf ("\n\n");
+}

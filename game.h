@@ -90,3 +90,4 @@ int createFile();
 int writeToFile();
 int viewGame();
 int removeFile();
+void printGoodbye();

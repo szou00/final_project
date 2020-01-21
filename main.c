@@ -20,7 +20,8 @@ int main(){
                           {'d', 2}};
 
   //
-  printWelcome();
+  // printWelcome();
+  printGoodbye();
   // createFile();
   initializeBoard(playerOne);
   // viewGame();
