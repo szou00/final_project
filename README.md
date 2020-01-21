@@ -19,10 +19,10 @@ Since battleship is a two-player game, the game will begin once both players con
 
 ## Bugs
 These are some errors that are we were not able to fix:
-- PlaceShips: At certain locations (mostly when it's close to the outer edge of the board), the game will print that there is another ship in the same position depite there not being any other ship.
+- PlaceShips: At certain locations (mostly when it's close to the outer edge of the board), the game will print that there is another ship in the same position depite there not being any other ship. Additionally, the x-coordinate doesn't seem to be checking for valid inputs. 
 - Targeting ships: If no integer is inputted (ex: you just press enter at the prompt), it will take in a 0.
 - Undesired input: If it's not the player's turn but they accidentally input something, this will be taken into the next input. (ex: they enter 5; when it's their turn, the game will immediately take in 5 as their x-coord input).
-- Ending game: game ends after client goes (player two), even if server (player one) wins. 
+- Ending game: game ends after client goes (player two), even if server (player one) wins.
 
 ## Instructions
 - Ideally, the game should work by following these instructions:
