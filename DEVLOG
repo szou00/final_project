@@ -35,3 +35,4 @@ DEVLOG
 
 - January 20 2020
 * William: Fixed the error cases for inputting orientation and coordinates. Also fixed the printing of boards for smoother transitions.
+           Fixed merge errors and code conflicts.
